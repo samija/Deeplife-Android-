@@ -24,7 +24,7 @@ import Database.UsersDataSource;
  * Created by Ab on 4/10/2015.
  */
 public class DesipleItemClicked extends Activity implements View.OnClickListener{
-UsersDBOpenHelper usersDBOpenHelper;
+
     UsersDataSource usersDataSource;
     int  parser;
 Button edit,delete,add,show;
@@ -74,8 +74,9 @@ ImageView iv;
             String lname = cursor.getString(usersDataSource.COL_LNAME);
             String phone = cursor.getString(usersDataSource.COL_PHONE);
             String email = cursor.getString(usersDataSource.COL_EMAIL);
-            String image = cursor.getString(usersDataSource.COL_IMAGE);
+String image = cursor.getString(usersDataSource.COL_IMAGE);
             iv.setImageURI(Uri.parse(image));
+
             fn.setText(fname);
             ln.setText(lname);
             ph.setText(phone);

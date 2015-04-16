@@ -115,8 +115,7 @@
         android:layout_alignEnd="@+id/Bshow"
         android:layout_below="@+id/etemailaddress"
         android:layout_toRightOf="@+id/Badd"
-        android:layout_toEndOf="@+id/Badd"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_toEndOf="@+id/Badd" />
 
     <Button
         android:layout_width="wrap_content"

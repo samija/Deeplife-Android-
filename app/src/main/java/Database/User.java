@@ -9,15 +9,13 @@ public class User {
     public String lname;
     public String phone;
     public String email;
-    public String image;
+public String image;
 
 
     public String getImage(){
-        return image;
-    }
-    public void setImage(String image){
-        this.image=image;
-    }
+        return image;}
+    public  void setImage(String image){
+        this.image=image; }
 
 
 
@@ -49,6 +47,9 @@ public class User {
     public void setEmail(String email){
         this.email=email;
     }
+
+
+
 
     public String toString(){
         //NumberFormat nf = NumberFormat.getCurrencyInstance();

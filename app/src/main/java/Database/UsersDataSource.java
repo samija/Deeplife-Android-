@@ -27,6 +27,7 @@ private static final String[] allColumns = {
         UsersDBOpenHelper.COLUMN_PHONE,
         UsersDBOpenHelper.COLUMN_EMAIL,
         UsersDBOpenHelper.COLUMN_IMAGE};
+
 //for retriving form table two
 private static final String[] allcolumnsfromtabletwo = {
         UsersDBOpenHelper.COLUMN_IDMEASURMENT,
@@ -47,6 +48,7 @@ private static final String[] allcolumnsfromtabletwo = {
     public static final int COL_PHONE = 3;
     public static final int COL_EMAIL = 4;
     public static final int COL_IMAGE = 5;
+
 
     public static final int COL_IDCHEAT = 2;
     public static final int COL_METHOD = 1;
@@ -212,13 +214,13 @@ UserMeasurment um= new UserMeasurment();
 
 
     //update a specific row
-    public void updateEntry(int id,String firstname,String lasttname,String phone,String email){
+    public void updateEntry(int id,String firstname,String lasttname,String phone,String email,String image){
         ContentValues cvUpdate =new ContentValues();
         cvUpdate.put(UsersDBOpenHelper.COLUMN_FNAME,firstname);
         cvUpdate.put(UsersDBOpenHelper.COLUMN_LNAME,lasttname);
         cvUpdate.put(UsersDBOpenHelper.COLUMN_PHONE,phone);
         cvUpdate.put(UsersDBOpenHelper.COLUMN_EMAIL,email);
-     //   cvUpdate.put(UsersDBOpenHelper.COLUMN_IMAGE,image);
+        cvUpdate.put(UsersDBOpenHelper.COLUMN_IMAGE,image);
 
         database.update(usersDBOpenHelper.TABLE_USER,cvUpdate,KEY_ROWID + "=" + id,null);
     }

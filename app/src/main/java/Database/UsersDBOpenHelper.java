@@ -14,7 +14,7 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
     private static final String LOGTAG = "EXPLOREUSER";
 
     private static final String DTATBASE_NAME="user.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
 //ma Table one
     public static final String TABLE_USER = "user";
@@ -23,7 +23,10 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
     public static final String COLUMN_LNAME = "lname";
     public static final String COLUMN_PHONE = "phone";
     public static final String COLUMN_EMAIL = "image";
-    public static final String COLUMN_IMAGE = "image";
+    public static final String COLUMN_IMAGE = "price";
+
+
+
     //ma Table two
     public static final String TABLE_USERMEASURMENT = "usermeasurment";
     public static final String COLUMN_IDMEASURMENT ="useridmeasurment";
@@ -34,14 +37,16 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
 
 
 
-//**** create ma table one
+    //**** create ma table one
     public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_USER + " (" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_FNAME + " TEXT, " +
+
             COLUMN_LNAME + " TEXT, " +
             COLUMN_EMAIL + " TEXT, " +
-            COLUMN_PHONE + " NUMERIC " +
-            COLUMN_IMAGE + " TEXT " + ")";
+            COLUMN_IMAGE + " TEXT, " +
+            COLUMN_PHONE + " NUMERIC " +")";
+
 
 
     //**** create ma table two
@@ -66,8 +71,9 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
-
+    public void onUpgrade(SQLiteDatabase db, int i, int i2) {
+db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+       onCreate(db);
     }
 
 

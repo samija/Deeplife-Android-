@@ -3,6 +3,7 @@ package abella.deeplife;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import Database.User;
@@ -27,6 +29,7 @@ public class DesipleAdd extends Activity implements View.OnClickListener{
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
     ImageView imageview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +40,11 @@ public class DesipleAdd extends Activity implements View.OnClickListener{
         add.setOnClickListener(this);
         show.setOnClickListener(this);
         getimage.setOnClickListener(this);
+      
     }
 
     private void initialize() {
+
         firstname = (EditText)findViewById(R.id.etfirstname);
         lastname = (EditText)findViewById(R.id.etlastname);
         phonenumber = (EditText)findViewById(R.id.etphonenumber);
@@ -56,7 +61,17 @@ getimage= (Button)findViewById(R.id.bimage);
         user.setLname(lastname.getText().toString());
         user.setEmail(email.getText().toString());
         user.setPhone(phonenumber.getText().toString());
-        user.setImage(selectedImagePath.toString());
+
+        if (selectedImagePath!=null){
+
+            user.setImage(selectedImagePath);
+        }else{
+            selectedImagePath = String.valueOf(R.mipmap.ic_launcher);
+
+            user.setImage(selectedImagePath);
+        }
+
+
 
         user = userdatasource.create(user);
     }
@@ -70,6 +85,8 @@ getimage= (Button)findViewById(R.id.bimage);
                 lastname.setText("");
                 phonenumber.setText("");
                 email.setText("");
+                selectedImagePath = null;
+              imageview.setImageDrawable(null);
 
                 break;
             }
@@ -82,9 +99,11 @@ getimage= (Button)findViewById(R.id.bimage);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
+
                 startActivityForResult(
                         Intent.createChooser(intent, "Select Picture"),
                         SELECT_PICTURE);
+
                 break;
         }
         }
@@ -96,10 +115,13 @@ getimage= (Button)findViewById(R.id.bimage);
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
-                Toast.makeText(this,selectedImagePath,Toast.LENGTH_SHORT).show();
+
                 System.out.println("Image Path : " + selectedImagePath);
                 imageview.setVisibility(View.VISIBLE);
                 imageview.setImageURI(selectedImageUri);
+
+
+
             }
         }
     }

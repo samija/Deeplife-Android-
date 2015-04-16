@@ -55,9 +55,13 @@ Button add;
 
 
 
-       final List<User> users = userdatasource.findall();
-        adapter = new ArrayAdapter<User>(this,android.R.layout.simple_list_item_1,users);
-        numberlist.setAdapter(adapter);
+    final List<User> users = userdatasource.findall();
+
+    adapter = new ArrayAdapter<User>(this, android.R.layout.simple_list_item_1, users);
+    numberlist.setAdapter(adapter);
+
+
+
 
        numberlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
