@@ -13,11 +13,15 @@ public class Splash extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+
+
+
         Thread timer = new Thread(){
+
             @Override
             public void run() {
                 try {
-                    sleep(1000);
+                    sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
@@ -27,6 +31,7 @@ public class Splash extends Activity {
                 }
             }
         };
+
         timer.start();
 
 

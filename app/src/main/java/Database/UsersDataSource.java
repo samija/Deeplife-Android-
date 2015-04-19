@@ -38,8 +38,20 @@ private static final String[] allcolumnsfromtabletwo = {
 
 
 
+    private static final String[] allColumnsschedule = {
+            UsersDBOpenHelper.COLUMN_SID,
+            UsersDBOpenHelper.COLUMN_LABLE,
+            UsersDBOpenHelper.COLUMN_YEAR,
+            UsersDBOpenHelper.COLUMN_MONTH,
+            UsersDBOpenHelper.COLUMN_DAY,
+            UsersDBOpenHelper.COLUMN_HOUR,
+            UsersDBOpenHelper.COLUMN_MINUTE};
+
+
     public static final String KEY_ROWID = "userId";
     public static final String KEY_ROWIDUM = "useridmeasurment";
+    public static final String KEY_ROWIDSCHEDULE = "useridschedule";
+
     public static final int COL_ROWID = 0;
 
 
@@ -53,6 +65,16 @@ private static final String[] allcolumnsfromtabletwo = {
     public static final int COL_IDCHEAT = 2;
     public static final int COL_METHOD = 1;
     public static final int COL_NUMBEROF = 3;
+
+
+    public static final int COL_SID = 0;
+    public static final int COL_LABLE = 1;
+    public static final int COL_YEAR = 2;
+    public static final int COL_MONTH = 3;
+    public static final int COL_DAY = 4;
+    public static final int COL_HOUR = 5;
+    public static final int COL_MINUTE = 6;
+
 
 
 public UsersDataSource(Context context){
@@ -89,14 +111,29 @@ return user;
         value.put(UsersDBOpenHelper.COLUMN_METHOD,userMeasurment.getMethod());
         value.put(UsersDBOpenHelper.COLUMN_NUMBEROF,userMeasurment.getNumberof());
        value.put(UsersDBOpenHelper.COLUMN_IDCHEAT,userMeasurment.getIdcheat());
-
-
         value.put(UsersDBOpenHelper.COLUMN_IDMEASURMENT,userMeasurment.getIdcheat());
        // values.put(UsersDBOpenHelper.COLUMN_TIME,userMeasurment.getTime());
         int insertMeasurmentid = (int) database.insert(UsersDBOpenHelper.TABLE_USERMEASURMENT,null,value);
         userMeasurment.setId(insertMeasurmentid);
         return userMeasurment;
     }
+
+    public Schedule createschedule(Schedule schedule){
+        ContentValues values = new ContentValues();
+
+        values.put(UsersDBOpenHelper.COLUMN_LABLE,schedule.getLable());
+        values.put(UsersDBOpenHelper.COLUMN_YEAR,schedule.getYear());
+        values.put(UsersDBOpenHelper.COLUMN_MONTH,schedule.getMonth());
+        values.put(UsersDBOpenHelper.COLUMN_DAY,schedule.getDay());
+        values.put(UsersDBOpenHelper.COLUMN_HOUR,schedule.getHour());
+        values.put(UsersDBOpenHelper.COLUMN_MINUTE,schedule.getMinute());
+        values.put(UsersDBOpenHelper.COLUMN_CHEATSID,schedule.getCheatsid());
+        values.put(UsersDBOpenHelper.COLUMN_SID,schedule.getCheatsid());
+        int insertid = (int) database.insert(UsersDBOpenHelper.TABLE_SCHEDULE,null,values);
+        schedule.setId(insertid);
+        return schedule;
+    }
+
 
 
 
@@ -146,6 +183,32 @@ return users;
 
 
 
+    public List<Schedule> findallschedule(){
+        List<Schedule> schedules = new ArrayList<Schedule>();
+
+        Cursor cursor = database.query(UsersDBOpenHelper.TABLE_SCHEDULE,allColumnsschedule,null,null,null,null,null,null);
+        Log.i(LOGTAG,"returned "+ cursor.getCount() + " rows");
+        if (cursor.getCount() >0){
+            while (cursor.moveToNext()){
+                Schedule schedule = new Schedule();
+
+                schedule.setLable(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_LABLE.toString())));
+                schedule.setYear(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_YEAR.toString())));
+                schedule.setMonth(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_MONTH.toString())));
+                schedule.setDay(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_DAY.toString())));
+                schedule.setHour(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_HOUR.toString())));
+                schedule.setMinute(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_MINUTE.toString())));
+                schedule.setCheatsid(cursor.getInt(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_CHEATSID)));
+             //   schedule.setSid(cursor.getInt(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_CHEATSID)));
+                schedules.add(schedule);
+            }
+
+        }
+
+        return schedules;
+    }
+
+
 
 
 
@@ -177,6 +240,41 @@ Cursor c = database.query(UsersDBOpenHelper.TABLE_USERMEASURMENT,allcolumnsfromt
         return userMeasurmentList;
     }
 
+    public List<Schedule> getRowfromtablethree(int rowId) {
+        List<Schedule> schedulelist = new ArrayList<Schedule>();
+        Cursor c = database.query(UsersDBOpenHelper.TABLE_SCHEDULE,allColumnsschedule,UsersDBOpenHelper.COLUMN_SID + " = ?",
+                new String[]{String.valueOf(rowId)},null,null,null,null);
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+
+            Schedule schedule = cursoradder(c);
+            schedulelist.add(schedule);
+            c.moveToNext();
+
+        }
+        c.close();
+        return schedulelist;
+    }
+
+
+    private Schedule cursoradder(Cursor c) {
+        Schedule uma= new Schedule();
+        uma.setId(c.getInt(0));
+        uma.setSid(c.getInt(0));
+        uma.setLable(c.getString(1));
+        uma.setYear(c.getString(2));
+        uma.setMonth(c.getString(3));
+        uma.setDay(c.getString(4));
+        uma.setHour(c.getString(5));
+        uma.setMinute(c.getString(6));
+
+        return  uma;
+
+    }
+
+
+
     private UserMeasurment cursortouserme(Cursor c) {
 UserMeasurment um= new UserMeasurment();
         um.setId(c.getInt(0));
@@ -191,6 +289,15 @@ UserMeasurment um= new UserMeasurment();
     public Cursor getRowfromtabletwo(int rowId) {
         String where = KEY_ROWIDUM + "=" + rowId;
         Cursor c = 	database.query(true, UsersDBOpenHelper.TABLE_USERMEASURMENT, allcolumnsfromtabletwo,
+                where, null, null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+    public Cursor getRowfromschedule(int rowId) {
+        String where = KEY_ROWIDSCHEDULE + "=" + rowId;
+        Cursor c = 	database.query(true, UsersDBOpenHelper.TABLE_SCHEDULE, allColumnsschedule,
                 where, null, null, null, null, null);
         if (c != null) {
             c.moveToFirst();

@@ -27,7 +27,7 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
 
     UsersDataSource usersDataSource;
     int  parser;
-Button edit,delete,add,show;
+Button edit,delete,add,show,schedule,showschedule;
     String gotbread;
     TextView fn,ln,ph,em;
 ImageView iv;
@@ -51,6 +51,11 @@ ImageView iv;
         em = (TextView)findViewById(R.id.tvemailaddress);
         iv = (ImageView)findViewById(R.id.image);
 
+        showschedule = (Button)findViewById(R.id.bshowschedule);
+        showschedule.setOnClickListener(this);
+
+        schedule=(Button)findViewById(R.id.bschedule);
+        schedule.setOnClickListener(this);
         edit=(Button)findViewById(R.id.bedit);
         edit.setOnClickListener(this);
         delete=(Button)findViewById(R.id.bdelete);
@@ -128,6 +133,25 @@ switch (view.getId()){
         iii = new Intent(DesipleItemClicked.this, ShowDesipleActivity.class);
         iii.putExtras(holder);
         startActivity(iii);
+        break;
+    case R.id.bschedule:
+        dbkeya = String.valueOf(parser);
+       holdera = new Bundle();
+        holdera.putString("key", dbkeya);
+
+Intent ix = new Intent(DesipleItemClicked.this,Scheduler.class);
+        ix.putExtras(holdera);
+        startActivity(ix);
+        break;
+
+    case R.id.bshowschedule:
+        dbkeya = String.valueOf(parser);
+        holdera = new Bundle();
+        holdera.putString("key", dbkeya);
+
+        Intent ixx = new Intent(DesipleItemClicked.this,ShowSchedule.class);
+        ixx.putExtras(holdera);
+        startActivity(ixx);
         break;
 
 }

@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:clickable="false"
+    android:background="#003c3f41">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Desiple"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/badddesiple"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-      />
+        android:background="@drawable/adddesiple"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/textView2" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="~~! Desiples !~~"
-        android:id="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/badddesiple" />
+        android:visibility="invisible"
+        android:layout_below="@+id/btnshowdesiples"
+        android:layout_above="@+id/badddesiple"
+        android:background="#b2a1a1a1" />
 
 
     <TextView
@@ -38,5 +33,25 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desiples"
+        android:id="@+id/btnshowdesiples"
+        android:layout_marginTop="140dp"
+        android:layout_below="@+id/tvreavel1"
+        android:layout_toRightOf="@+id/btnshowactivities"
+        android:layout_toEndOf="@+id/btnshowactivities" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activities"
+        android:id="@+id/btnshowactivities"
+        android:layout_alignBaseline="@+id/btnshowdesiples"
+        android:layout_alignBottom="@+id/btnshowdesiples"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

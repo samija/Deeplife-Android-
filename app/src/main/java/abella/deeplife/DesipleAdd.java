@@ -40,7 +40,7 @@ public class DesipleAdd extends Activity implements View.OnClickListener{
         add.setOnClickListener(this);
         show.setOnClickListener(this);
         getimage.setOnClickListener(this);
-      
+
     }
 
     private void initialize() {
