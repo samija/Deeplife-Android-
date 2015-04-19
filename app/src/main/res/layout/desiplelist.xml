@@ -8,7 +8,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/badddesiple"
+        android:id="@+id/badddesipleB"
         android:background="@drawable/adddesiple"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
@@ -17,9 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:visibility="invisible"
-        android:layout_below="@+id/btnshowdesiples"
-        android:layout_above="@+id/badddesiple"
+  android:visibility="invisible"
+        android:layout_below="@+id/btnshowdesiplesB"
+        android:layout_above="@+id/badddesipleB"
         android:background="#b2a1a1a1" />
 
 
@@ -38,19 +38,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Desiples"
-        android:id="@+id/btnshowdesiples"
+        android:id="@+id/btnshowdesiplesB"
         android:layout_marginTop="140dp"
         android:layout_below="@+id/tvreavel1"
-        android:layout_toRightOf="@+id/btnshowactivities"
-        android:layout_toEndOf="@+id/btnshowactivities" />
+        android:layout_toRightOf="@+id/btnshowactivitiesB"
+        android:layout_toEndOf="@+id/btnshowactivitiesB" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Activities"
-        android:id="@+id/btnshowactivities"
-        android:layout_alignBaseline="@+id/btnshowdesiples"
-        android:layout_alignBottom="@+id/btnshowdesiples"
+        android:id="@+id/btnshowactivitiesB"
+        android:layout_alignBaseline="@+id/btnshowdesiplesB"
+        android:layout_alignBottom="@+id/btnshowdesiplesB"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

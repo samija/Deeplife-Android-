@@ -5,14 +5,15 @@
 
     <Button
         android:layout_width="30dp"
-        android:layout_height="40dp"
-        android:id="@+id/button"
+        android:layout_height="30dp"
+        android:id="@+id/btndesipleitemclicked"
         android:background="@drawable/go"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="42dp"
-        android:layout_marginEnd="42dp" />
+        android:layout_marginEnd="42dp"
+        android:onClick="onButtonClickListner" />
 
     <TextView
         android:layout_width="wrap_content"

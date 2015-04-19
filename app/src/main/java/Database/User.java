@@ -54,7 +54,7 @@ public String image;
     public String toString(){
         //NumberFormat nf = NumberFormat.getCurrencyInstance();
 
-        return fname;//+" " + lname+"\n("+(phone)+")";
+        return fname+" " + lname+"\n("+(phone)+")";
 
     }
 
