@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Database.User;
@@ -22,23 +23,27 @@ import Database.UsersDataSource;
  */
 public class DesipleList extends Activity implements View.OnClickListener {
     Button add, desiples, activities;
-int hacker=1;
+    int pars = 0;
     UsersDataSource userdatasource;
-
-
+    User user;
+    ImageView lm,di;
     ListView numberlist = null;
+    TextView tv;
 
-    public List<User> myUser = new ArrayList<User>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //full screener
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.desiplelist);
 
 
+        tv = (TextView) findViewById(R.id.tv);
 
-
-
+        di = (ImageView) findViewById(R.id.imageView2);
         activities = (Button) findViewById(R.id.btnshowactivitiesB);
         activities.setOnClickListener(this);
 
@@ -48,6 +53,7 @@ int hacker=1;
         add = (Button) findViewById(R.id.badddesipleB);
         add.setOnClickListener(this);
 
+        lm = (ImageView)findViewById(R.id.loginimage);
 
         numberlist = (ListView) findViewById(R.id.listView);
         userdatasource = new UsersDataSource(this);
@@ -55,26 +61,6 @@ int hacker=1;
 
 
         final List<User> users = userdatasource.findall();
-
-
-        numberlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-hacker=pos;
-                User current = users.get(pos);
-                TextView tx = (TextView) findViewById(R.id.tvreavel1);
-                tx.setText("" + current.id);
-
-                String bread = tx.getText().toString();
-                Bundle basket = new Bundle();
-                basket.putString("key", bread);
-                Intent i;
-                i = new Intent(DesipleList.this, DesipleItemClicked.class);
-                i.putExtras(basket);
-                startActivity(i);
-
-            }
-        });
 
 
     }
@@ -94,25 +80,47 @@ hacker=pos;
 
                 adapterum = new ArrayAdapter<UserMeasurment>(this, android.R.layout.simple_list_item_1, use);
                 numberlist.setAdapter(adapterum);
-
+                numberlist.setVisibility(View.VISIBLE);
                 break;
             case R.id.btnshowdesiplesB:
 
+
+
+/*
+try{
+    Cursor us = userdatasource.getRow(2);
+    String gh = us.getString(userdatasource.COL_IMAGE).toString();
+    Toast.makeText(this, gh, Toast.LENGTH_SHORT).show();
+
+    di.setImageURI(Uri.parse(gh));
+
+}catch (Exception e) {
+    e.printStackTrace();
+}
+
+          */
+
+
+
                 ArrayAdapter<User> adapter;
                 final List<User> users = userdatasource.findall();
-                adapter = new ArrayAdapter<User>(this, R.layout.item_layout, R.id.tv, users);
+                adapter = new ArrayAdapter<User>(this, R.layout.item_layout,R.id.tv, users);
 
                 numberlist.setAdapter(adapter);
-                // adapter = new ArrayAdapter<User>(this,android.R.layout.simple_list_item_1, users);
-                // numberlist.setAdapter(adapter);
                 numberlist.setVisibility(View.VISIBLE);
 
 
 
-                break;
-        }
 
-    }
+
+
+            
+
+
+    break;
+}}
+
+
 
 
     public void onButtonClickListner(View v) {
@@ -126,12 +134,15 @@ hacker=pos;
         TextView tx = (TextView) findViewById(R.id.tvreavel1);
         tx.setText("" + current.id);
 
+
+
+
         String bread = tx.getText().toString();
         Bundle basket = new Bundle();
         basket.putString("key", bread);
         Intent i;
         i = new Intent(DesipleList.this, DesipleItemClicked.class);
         i.putExtras(basket);
-        startActivity(i);
+    startActivity(i);
     }
 }

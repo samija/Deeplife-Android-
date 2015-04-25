@@ -1,57 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="10dp"
+
     android:clickable="false"
-    android:background="#003c3f41">
+    android:background="#fffdfdfd"
+    android:id="@+id/des">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/linearLayout2"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:background="#0099cc">
+
+        <Button
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/bnavigation"
+            android:visibility="visible"
+            android:background="@drawable/navigation"
+            android:layout_weight="0.74" />
+
+        <TextView
+            android:layout_width="54dp"
+            android:layout_height="25dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="namer"
+            android:id="@+id/tvreavel1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="invisible"
+            android:background="@drawable/navigation"
+            android:layout_above="@+id/linearLayout3"
+            android:layout_toLeftOf="@+id/btnshowdesiplesB"
+            android:layout_toStartOf="@+id/btnshowdesiplesB" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/dplogo1"
+            android:layout_marginLeft="170dp"
+            />
+
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="150dp"
+    android:background="#fffdfdfd"
+    android:weightSum="1"
+    android:layout_below="@+id/linearLayout2"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/linearLayout3">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:background="@drawable/avater"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.18"
+        android:id="@+id/loginimage" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textColor="#ff0f0f0f"
+        android:layout_gravity="center_vertical"
+        android:textSize="20dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#828b90"
+        android:id="@+id/linearLayout4"
+        android:orientation="horizontal"></LinearLayout>
+
 
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/badddesipleB"
-        android:background="@drawable/adddesiple"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:background="@drawable/adduser"
+        android:layout_alignTop="@+id/btnshowdesiplesB"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
   android:visibility="invisible"
-        android:layout_below="@+id/btnshowdesiplesB"
-        android:layout_above="@+id/badddesipleB"
-        android:background="#b2a1a1a1" />
+        android:background="#0099cc"
+        android:layout_below="@+id/badddesipleB"
+        android:layout_above="@+id/linearLayout4" />
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="namer"
-        android:id="@+id/tvreavel1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="invisible"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Desiples"
         android:id="@+id/btnshowdesiplesB"
-        android:layout_marginTop="140dp"
-        android:layout_below="@+id/tvreavel1"
+        android:background="@drawable/newbuttondesiples"
+        android:textColor="#ff0d0d0d"
+        android:layout_alignTop="@+id/btnshowactivitiesB"
         android:layout_toRightOf="@+id/btnshowactivitiesB"
         android:layout_toEndOf="@+id/btnshowactivitiesB" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Activities"
         android:id="@+id/btnshowactivitiesB"
-        android:layout_alignBaseline="@+id/btnshowdesiplesB"
-        android:layout_alignBottom="@+id/btnshowdesiplesB"
+        android:layout_below="@+id/linearLayout3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/newbuttonactivities"
+        android:textColor="#ff0d0d0d" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dplogo2"
+        android:layout_alignTop="@+id/linearLayout4"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

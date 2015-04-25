@@ -2,151 +2,211 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
   >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:background="#0099cc"
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+android:layout_marginLeft="0dp"
+
+
+            android:layout_marginTop="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/image"
+            android:layout_below="@+id/bdelete"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/bdelete"
+            android:layout_alignStart="@+id/bdelete"
+            android:layout_weight="0.30" />
+    </LinearLayout>
 
     <TextView
+android:layout_marginTop="-10dp"
+        android:layout_marginLeft="150dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="First Name:-"
-        android:id="@+id/textView5" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Last Name:-"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Phone Number:-"
-        android:id="@+id/textView7"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Email Address:-"
-        android:id="@+id/textView8"
-        android:layout_below="@+id/tvphonenumber"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="name"
         android:id="@+id/tvfirstname"
-        android:layout_below="@+id/textView5"
+        android:textSize="25dp"
+        android:layout_below="@+id/tvlastname"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+       />
 
     <TextView
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tvlastname"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 
     <TextView
+        android:layout_marginLeft="150dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="phone"
         android:id="@+id/tvphonenumber"
-        android:layout_below="@+id/textView7"
+        android:layout_below="@+id/tvfirstname"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="20dp"
+      />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/bedit"
+
+        android:layout_alignTop="@+id/bdelete"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/editc"
+        />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/bdelete"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/bedit"
+        android:layout_toEndOf="@+id/bedit"
+        android:background="@drawable/deletered" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="invisible"
+
+        android:id="@+id/baddactivity"
+        android:background="@drawable/addstatus"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="   Edit Desiple   "
-        android:id="@+id/bedit"
+        android:text="Status"
+        android:id="@+id/bshowactivity"
+        android:layout_alignTop="@+id/bshowschedule"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_marginLeft="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email"
+        android:id="@+id/tvemailaddress"
+        android:layout_below="@+id/tvphonenumber"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="15dp"
+       />
+
+    <Button
+        android:visibility="invisible"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/bschedule"
+        android:background="@drawable/addschedule"
+        android:layout_alignTop="@+id/bshowschedule"
+        android:layout_alignLeft="@+id/baddactivity"
+        android:layout_alignStart="@+id/baddactivity" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schedule"
+        android:id="@+id/bshowschedule"
+        android:layout_alignBottom="@+id/baddactivity"
+        android:layout_toRightOf="@+id/bshowactivity"
+        android:layout_toEndOf="@+id/bshowactivity" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MENU"
+        android:id="@+id/button"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:background="#0099cc" />
 
-        android:layout_centerVertical="true" />
-
-    <Button
+    <ListView
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Desiple"
-        android:id="@+id/bdelete"
-        android:layout_marginTop="44dp"
-        android:layout_alignTop="@+id/bedit"
-        android:layout_alignLeft="@+id/bedit"
-        android:layout_alignStart="@+id/bedit"
-        android:layout_alignRight="@+id/bedit"
-        android:layout_alignEnd="@+id/bedit" />
+        android:id="@+id/listcombination"
+        android:background="#b2a1a1a1"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button"
+        android:layout_below="@+id/bshowactivity"
+        android:layout_above="@+id/bedit" />
 
-    <Button
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Activity"
-        android:id="@+id/baddactivity"
-        android:layout_alignTop="@+id/image"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Massive Evangelism"
+        android:id="@+id/cbme"
+        android:layout_below="@+id/bshowactivity"
+        android:layout_toRightOf="@+id/bshowactivity"
+        android:layout_toEndOf="@+id/bshowactivity"
+        android:checked="false"
+        android:visibility="invisible" />
 
-    <Button
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Activity"
-        android:id="@+id/bshowactivity"
-        android:layout_alignBaseline="@+id/bdelete"
-        android:layout_alignBottom="@+id/bdelete"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image"
-        android:layout_below="@+id/bdelete"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/bdelete"
-        android:layout_alignEnd="@+id/bdelete"
-        android:layout_toRightOf="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7" />
+        android:text="One To One Evangelism"
+        android:id="@+id/cbotoe"
+        android:layout_below="@+id/cbme"
+        android:layout_alignLeft="@+id/cbme"
+        android:layout_alignStart="@+id/cbme"
+        android:checked="false"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tvemailaddress"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Number Of"
+        android:id="@+id/tvinformer"
+        android:layout_below="@+id/cbotoe"
+        android:layout_alignLeft="@+id/cbotoe"
+        android:layout_alignStart="@+id/cbotoe"
+        android:visibility="invisible" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/etno"
+        android:layout_below="@+id/tvinformer"
+        android:layout_toRightOf="@+id/bdelete"
+        android:layout_toEndOf="@+id/bdelete"
+        android:visibility="invisible" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add schedule"
-        android:id="@+id/bschedule"
-        android:layout_below="@+id/baddactivity"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show schedule"
-        android:id="@+id/bshowschedule"
-        android:layout_below="@+id/bschedule"
-        android:layout_alignRight="@+id/bshowactivity"
-        android:layout_alignEnd="@+id/bshowactivity" />
+        android:text="Save"
+        android:id="@+id/bsm"
+        android:layout_below="@+id/etno"
+        android:layout_alignRight="@+id/cbme"
+        android:layout_alignEnd="@+id/cbme"
+        android:visibility="invisible"
+        />
 
 </RelativeLayout>

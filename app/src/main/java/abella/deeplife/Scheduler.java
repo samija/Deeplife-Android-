@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ import Database.UsersDataSource;
  * Created by Ab on 4/17/2015.
  */
 public class Scheduler extends Activity{
+    private PendingIntent pendingIntent;
     DatePicker pickerDate;
     TimePicker pickerTime;
     Button buttonSetAlarm;
@@ -31,7 +34,7 @@ public class Scheduler extends Activity{
     EditText desc;
     int parser;
     UsersDataSource usersDataSource;
-
+    private ScheduleClient scheduleClient;
     final static int RQS_1 = 1;
    Schedule schedule = new Schedule();
 
@@ -39,10 +42,14 @@ public class Scheduler extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule);
 
-
+        scheduleClient = new ScheduleClient(this);
+        scheduleClient.doBindService();
 
 
         usersDataSource = new UsersDataSource(this);
@@ -89,12 +96,16 @@ public class Scheduler extends Activity{
                     //The set Date/Time already passed
                     Toast.makeText(getApplicationContext(),
                             "Invalid Date/Time",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                 }
 
                else {
-                  setAlarm(cal);
-                  createdata();
+                    createdata();
+                   // setAlarm(cal);
+                    setalarmfromnotify();
+
+
+
                 }
 
             }});
@@ -109,26 +120,55 @@ public class Scheduler extends Activity{
                 + "Alarm is set@ " + targetCal.getTime() + "\n"
                 + "***\n");
 
+
+
+
         Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), RQS_1, intent, 0);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+
     }
 
+    private void setRepeativeAlarm(Calendar targetCal){
 
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), RQS_1, intent, 0);
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 8000;
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Toast.makeText(getApplicationContext(), "Alarm Set", Toast.LENGTH_SHORT).show();
 
+    }
 
+private void setalarmfromnotify(){
+// Get the date from our datepicker
+    int day = pickerDate.getDayOfMonth();
+    int month = pickerDate.getMonth();
+    int year = pickerDate.getYear();
+    // Create a new calendar set to the date chosen
+    // we set the time to midnight (i.e. the first minute of that day)
+    Calendar c = Calendar.getInstance();
+    c.set(year, month, day);
+    c.set(Calendar.HOUR_OF_DAY, pickerTime.getCurrentHour());
+    c.set(Calendar.MINUTE, pickerTime.getCurrentMinute());
+    c.set(Calendar.SECOND, 0);
+    // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
+    scheduleClient.setAlarmForNotification(c);
+    // Notify the user what they just did
+    Toast.makeText(this, "Notification set for: "+ day +"/"+ (month+1) +"/"+ year, Toast.LENGTH_SHORT).show();
+}
 
     private void createdata() {
 
-       schedule.setCheatsid(Integer.parseInt(gotbread));
-       schedule.setLable(desc.getText().toString());
+        schedule.setCheatsid(Integer.parseInt(gotbread));
+        schedule.setLable(desc.getText().toString());
         schedule.setYear(String.valueOf(pickerDate.getYear()));
         schedule.setMonth(String.valueOf(pickerDate.getMonth()));
         schedule.setDay(String.valueOf(pickerDate.getDayOfMonth()));
         schedule.setHour(String.valueOf(pickerTime.getCurrentHour()));
         schedule.setMinute(String.valueOf(pickerTime.getCurrentMinute()));
-       schedule =  usersDataSource.createschedule(schedule);
+        schedule =  usersDataSource.createschedule(schedule);
 
 
     }

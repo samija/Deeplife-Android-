@@ -19,7 +19,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     private static final int MY_NOTIFICATION_ID=1;
     NotificationManager notificationManager;
     Notification myNotification;
-    private final String myBlog = "http://android-er.blogspot.com/";
+    private final String myBlog = "Great Comision";
 
     @Override
     public void onReceive(Context context, Intent intent) {

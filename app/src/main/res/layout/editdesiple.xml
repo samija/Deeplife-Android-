@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-   >
+    android:background="#0099cc"
+    android:theme="@style/Theme.Transparent"
+    android:padding = "10dp">
 
     <TextView
+        android:typeface="monospace"
+        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="First Name:-"
-        android:id="@+id/textView5" />
+        android:id="@+id/textView5"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
+        android:typeface="monospace"
+        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -22,6 +31,8 @@
         android:layout_marginTop="50dp" />
 
     <TextView
+        android:typeface="monospace"
+        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -33,13 +44,14 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:typeface="monospace"
+        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Email Address:-"
         android:id="@+id/textView8"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/textView7"
+        android:layout_below="@+id/etupdatephone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -48,20 +60,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/etupdatefn"
         android:layout_below="@+id/textView5"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/bupdatedesiple"
-        android:layout_alignEnd="@+id/bupdatedesiple" />
+        android:layout_alignRight="@+id/etupdateln"
+        android:layout_alignEnd="@+id/etupdateln"
+
+        android:layout_alignLeft="@+id/etupdateln"
+        android:layout_alignStart="@+id/etupdateln" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etupdateln"
         android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/bupdatedesiple"
-        android:layout_alignEnd="@+id/bupdatedesiple" />
+        android:layout_alignRight="@+id/etupdatephone"
+        android:layout_alignEnd="@+id/etupdatephone"
+        android:layout_toRightOf="@+id/beditimage"
+        android:layout_toEndOf="@+id/beditimage" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -70,51 +83,47 @@
         android:ems="10"
         android:id="@+id/etupdatephone"
         android:layout_below="@+id/textView7"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/bupdatedesiple"
-        android:layout_alignEnd="@+id/bupdatedesiple" />
+        android:layout_toRightOf="@+id/beditimage"
+        android:layout_toEndOf="@+id/beditimage" />
 
     <EditText
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etupdateemail"
         android:layout_below="@+id/textView8"
+        android:layout_alignRight="@+id/etupdatephone"
+        android:layout_alignEnd="@+id/etupdatephone"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/bupdatedesiple"
-        android:layout_alignEnd="@+id/bupdatedesiple" />
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UPDATE"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:id="@+id/bupdatedesiple"
-        android:layout_below="@+id/etupdateemail"
-        android:layout_toRightOf="@+id/textView5"
-        android:layout_toEndOf="@+id/textView5"
-        android:layout_marginTop="53dp" />
+        android:paddingTop="10dp"
+        android:background="@drawable/save"
+        android:layout_alignTop="@+id/beditimage"
+        android:layout_alignRight="@+id/etupdateemail"
+        android:layout_alignEnd="@+id/etupdateemail" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Desiple Image"
+        android:layout_width="70dp"
+        android:layout_height="75dp"
         android:id="@+id/beditimage"
+        android:background="@drawable/uploadimage"
         android:layout_below="@+id/etupdateemail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:id="@+id/imaged"
-        android:layout_below="@+id/bupdatedesiple"
+        android:layout_alignTop="@+id/bupdatedesiple"
+        android:layout_alignRight="@+id/bupdatedesiple"
+        android:layout_alignEnd="@+id/bupdatedesiple"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/etupdateemail"
-        android:layout_alignEnd="@+id/etupdateemail" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

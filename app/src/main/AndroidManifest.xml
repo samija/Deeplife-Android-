@@ -30,6 +30,7 @@
 
 
         <activity
+            android:theme="@android:style/Theme.Dialog"
             android:screenOrientation="portrait"
             android:name=".DesipleAdd">
         </activity>
@@ -40,9 +41,15 @@
             android:name=".DesipleItemClicked">
         </activity>
 
-
+        <activity
+            android:theme="@android:style/Theme.Dialog"
+            android:screenOrientation="portrait"
+            android:name=".DeletePrompt">
+        </activity>
 
         <activity
+
+            android:theme="@android:style/Theme.Dialog"
             android:screenOrientation="portrait"
             android:name=".EditDesiple">
         </activity>
@@ -61,7 +68,12 @@
             android:screenOrientation="portrait"
             android:name=".Scheduler">
         </activity>
-        <receiver android:name=".AlarmReceiver" android:process=":remote" />
+
+        <receiver android:name=".AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
 
         <activity
@@ -69,6 +81,9 @@
             android:name=".ShowSchedule">
         </activity>
 
+        <activity android:name=".SecondActivity" />
+        <service android:name=".ScheduleService" />
+        <service android:name=".NotifyService" />
 
     </application>
 

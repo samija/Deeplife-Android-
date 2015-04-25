@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    android:background="#0099cc">
+
+    <TextView
+        android:typeface="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Are You Sure?"
+        android:id="@+id/textView14"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/bno"
+        android:layout_alignEnd="@+id/bno"
+        android:gravity="center_horizontal" />
+
+    <Button
+        android:layout_marginLeft="7dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/byes"
+        android:background="@drawable/yes"
+        android:layout_alignTop="@+id/bno"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/bno"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="75dp"
+        android:layout_marginStart="75dp"
+        android:background="@drawable/bno"
+        android:layout_below="@+id/textView14"
+        android:layout_toRightOf="@+id/byes"
+        android:layout_toEndOf="@+id/byes" />
+
+</RelativeLayout>

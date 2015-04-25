@@ -3,13 +3,19 @@ package Database;
 /**
  * Created by Ab on 4/8/2015.
  */
-public class User {
+public class User{
     public int id;
     public String fname;
     public String lname;
     public String phone;
     public String email;
-public String image;
+
+
+
+
+    public String image;
+
+
 
 
     public String getImage(){
@@ -53,6 +59,7 @@ public String image;
 
     public String toString(){
         //NumberFormat nf = NumberFormat.getCurrencyInstance();
+
 
         return fname+" " + lname+"\n("+(phone)+")";
 

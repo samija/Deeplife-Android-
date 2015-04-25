@@ -152,6 +152,7 @@ while (cursor.moveToNext()){
     user.setPhone(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_PHONE)));
     user.setEmail(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_EMAIL)));
     user.setImage(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_IMAGE)));
+
    users.add(user);
 }
 

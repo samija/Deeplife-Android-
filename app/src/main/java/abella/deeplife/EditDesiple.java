@@ -7,10 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import Database.UsersDBOpenHelper;
@@ -20,6 +21,7 @@ import Database.UsersDataSource;
  * Created by Ab on 4/12/2015.
  */
 public class EditDesiple extends Activity implements View.OnClickListener{
+
     String gotbread;
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
@@ -32,8 +34,14 @@ String image,imagenew;
     UsersDBOpenHelper usersDBOpenHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editdesiple);
+
+
 
         usersDataSource = new UsersDataSource(this);
         usersDataSource.open();
@@ -61,36 +69,37 @@ update = (Button) findViewById(R.id.bupdatedesiple);
         Cursor cursor = usersDataSource.getRow(parse);
         if (cursor.moveToFirst()) {
 
-           String fname = cursor.getString(usersDataSource.COL_FNAME);
+            String fname = cursor.getString(usersDataSource.COL_FNAME);
             String lname = cursor.getString(usersDataSource.COL_LNAME);
             String phone = cursor.getString(usersDataSource.COL_PHONE);
             String email = cursor.getString(usersDataSource.COL_EMAIL);
 
+            image = cursor.getString(usersDataSource.COL_IMAGE);
 
-            if(selectedImagePath!= null){
-                image = selectedImagePath.toString();
+            if (image != null) {
+                imv.setImageURI(Uri.parse(image));
+                try {
+                    imv.setImageResource(Integer.parseInt(image));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-            }else{
-                selectedImagePath = String.valueOf(R.mipmap.ic_launcher);
-                image = selectedImagePath.toString();
+            } else {
+                imv.setImageResource(R.drawable.desiple);
             }
 
 
-            image = cursor.getString(usersDataSource.COL_IMAGE);
-            imv.setImageURI(Uri.parse(image));
 
-           fnn.setText(fname);
-            lnn.setText(lname);
-            phh.setText(phone);
-            emm.setText(email);
+                fnn.setText(fname);
+                lnn.setText(lname);
+                phh.setText(phone);
+                emm.setText(email);
+            }
+            cursor.close();
+
+
         }
-        cursor.close();
 
-
-
-
-
-    }
 
     @Override
     public void onClick(View view) {
@@ -130,10 +139,11 @@ update = (Button) findViewById(R.id.bupdatedesiple);
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
 
-                System.out.println("Image Path : " + selectedImagePath);
+
 
              imv.setImageURI(selectedImageUri);
-imagenew = selectedImagePath;
+                imv.setVisibility(View.VISIBLE);
+             imagenew = selectedImagePath;
 
 
             }

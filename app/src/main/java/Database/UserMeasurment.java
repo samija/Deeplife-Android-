@@ -46,7 +46,7 @@ public class UserMeasurment {
     public String toString(){
         //NumberFormat nf = NumberFormat.getCurrencyInstance();
 
-        return numberof+" " + method+"\n" + "IDcheat:- " +idcheat+"\n" + "IDMeasurment:- " +id;
+        return numberof+" " + method;
 
     }
 

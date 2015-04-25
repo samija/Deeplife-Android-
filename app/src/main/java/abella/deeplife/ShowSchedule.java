@@ -3,6 +3,8 @@ package abella.deeplife;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -10,8 +12,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import Database.Schedule;
-import Database.User;
-import Database.UserMeasurment;
 import Database.UsersDataSource;
 
 /**
@@ -26,8 +26,16 @@ public class ShowSchedule extends Activity {
     ListView listschedules = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showschedule);
+
+
+
+
+
 listschedules = (ListView)findViewById(R.id.listviewschedule);
         userdatasource = new UsersDataSource(this);
         userdatasource.open();

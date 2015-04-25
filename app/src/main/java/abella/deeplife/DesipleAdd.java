@@ -3,18 +3,15 @@ package abella.deeplife;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import Database.User;
 import Database.UsersDataSource;
@@ -32,15 +29,20 @@ public class DesipleAdd extends Activity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.desipleadd);
+
+
+
         userdatasource = new UsersDataSource(this);
         userdatasource.open();
         initialize();
         add.setOnClickListener(this);
         show.setOnClickListener(this);
         getimage.setOnClickListener(this);
-
+imageview.setImageResource(R.drawable.desiple);
     }
 
     private void initialize() {
@@ -52,7 +54,7 @@ public class DesipleAdd extends Activity implements View.OnClickListener{
         add = (Button)findViewById(R.id.Badd);
         show= (Button)findViewById(R.id.Bshow);
 getimage= (Button)findViewById(R.id.bimage);
-        imageview = (ImageView)findViewById(R.id.imageView);
+      imageview = (ImageView)findViewById(R.id.imageView);
     }
 
     private void createData(){
@@ -66,8 +68,7 @@ getimage= (Button)findViewById(R.id.bimage);
 
             user.setImage(selectedImagePath);
         }else{
-            selectedImagePath = String.valueOf(R.mipmap.ic_launcher);
-
+            selectedImagePath = String.valueOf(R.drawable.desiple);
             user.setImage(selectedImagePath);
         }
 
@@ -86,7 +87,7 @@ getimage= (Button)findViewById(R.id.bimage);
                 phonenumber.setText("");
                 email.setText("");
                 selectedImagePath = null;
-              imageview.setImageDrawable(null);
+              imageview.setImageResource(R.drawable.desiple);
 
                 break;
             }
@@ -116,8 +117,8 @@ getimage= (Button)findViewById(R.id.bimage);
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
 
-                System.out.println("Image Path : " + selectedImagePath);
-                imageview.setVisibility(View.VISIBLE);
+
+               imageview.setImageResource(0);
                 imageview.setImageURI(selectedImageUri);
 
 

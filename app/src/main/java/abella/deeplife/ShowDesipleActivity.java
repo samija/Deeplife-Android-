@@ -3,6 +3,8 @@ package abella.deeplife;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -11,7 +13,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import Database.User;
 import Database.UserMeasurment;
 import Database.UsersDataSource;
 
@@ -29,8 +30,14 @@ public class ShowDesipleActivity extends Activity {
     private List<UserMeasurment> myUserMeasurment = new ArrayList<UserMeasurment>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showdesipleactivity);
+
+
         numof = (TextView)findViewById(R.id.tvgetnumberof);
         methd = (TextView)findViewById(R.id.tvgetmethodof);
         tbtwo = (ListView)findViewById(R.id.listView2);

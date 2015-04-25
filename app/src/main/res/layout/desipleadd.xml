@@ -1,30 +1,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:context=".MainActivity"
 
     >
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add To Database"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/Badd"
-        android:layout_alignParentBottom="true"
+        android:background="@drawable/register"
+        android:layout_below="@+id/bimage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show Database"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/Bshow"
-        android:layout_alignBottom="@+id/Badd"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        />
+        android:background="@drawable/homea"
+        android:layout_below="@+id/Badd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,10 +38,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/etfirstname"
         android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/Bshow"
-        android:layout_alignEnd="@+id/Bshow" />
+        android:layout_toRightOf="@+id/textView"
+        android:layout_alignRight="@+id/etlastname"
+        android:layout_alignEnd="@+id/etlastname" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,10 +56,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/etlastname"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/Bshow"
-        android:layout_alignEnd="@+id/Bshow" />
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_alignRight="@+id/etphonenumber"
+        android:layout_alignEnd="@+id/etphonenumber" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,10 +76,8 @@
         android:ems="10"
         android:id="@+id/etphonenumber"
         android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -101,29 +95,29 @@
         android:ems="10"
         android:id="@+id/etemailaddress"
         android:layout_below="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/etphonenumber"
-        android:layout_alignEnd="@+id/etphonenumber" />
+        android:layout_alignLeft="@+id/etphonenumber"
+        android:layout_alignStart="@+id/etphonenumber" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/imageView"
-        android:layout_above="@+id/Badd"
-        android:layout_alignRight="@+id/Bshow"
-        android:layout_alignEnd="@+id/Bshow"
+        android:paddingRight="10dp"
         android:layout_below="@+id/etemailaddress"
-        android:layout_toRightOf="@+id/Badd"
-        android:layout_toEndOf="@+id/Badd" />
+        android:layout_alignLeft="@+id/etemailaddress"
+        android:layout_alignStart="@+id/etemailaddress"
+        android:layout_alignRight="@+id/etemailaddress"
+        android:layout_alignEnd="@+id/etemailaddress"
+        android:layout_alignBottom="@+id/Bshow" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Desiple Picture"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:id="@+id/bimage"
+        android:background="@drawable/uploadimage"
+
         android:layout_below="@+id/etemailaddress"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/Badd"
+        android:layout_alignEnd="@+id/Badd" />
 
 </RelativeLayout>
