@@ -21,7 +21,7 @@ import Database.UsersDataSource;
  */
 public class DesipleAdd extends Activity implements View.OnClickListener{
     UsersDataSource userdatasource;
-    EditText firstname,lastname,phonenumber,email;
+    EditText firstname,lastname,phonenumber,email,code;
     Button add,show,getimage;
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
@@ -46,7 +46,7 @@ imageview.setImageResource(R.drawable.desiple);
     }
 
     private void initialize() {
-
+code = (EditText)findViewById(R.id.etcc);
         firstname = (EditText)findViewById(R.id.etfirstname);
         lastname = (EditText)findViewById(R.id.etlastname);
         phonenumber = (EditText)findViewById(R.id.etphonenumber);
@@ -62,7 +62,8 @@ getimage= (Button)findViewById(R.id.bimage);
         user.setFname(firstname.getText().toString());
         user.setLname(lastname.getText().toString());
         user.setEmail(email.getText().toString());
-        user.setPhone(phonenumber.getText().toString());
+     //   String phoner = code.getText().toString()+phonenumber.getText().toString();
+        user.setPhone(code.getText().toString()+phonenumber.getText().toString());
 
         if (selectedImagePath!=null){
 
@@ -82,6 +83,7 @@ getimage= (Button)findViewById(R.id.bimage);
         switch (view.getId()){
             case R.id.Badd: {
                 createData();
+                code.setText("");
                 firstname.setText("");
                 lastname.setText("");
                 phonenumber.setText("");

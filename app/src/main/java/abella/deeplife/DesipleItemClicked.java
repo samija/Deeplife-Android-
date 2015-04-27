@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -33,7 +34,9 @@ import Database.UsersDataSource;
  * Created by Ab on 4/10/2015.
  */
 public class DesipleItemClicked extends Activity implements View.OnClickListener {
-
+    String emailAdd;
+   String phone;
+   int phonenumber;
     Canvas canvas;
     Button set;
     CheckBox a, b;
@@ -43,10 +46,10 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
     Button edit, delete, add, show, schedule, showschedule;
     String gotbread;
     TextView fn, ln, ph, em, informer;
-    ImageView iv;
+    ImageView iv,iv3,iv4;
     ArrayAdapter<UserMeasurment> adapter;
     ArrayAdapter<Schedule> adaptera;
-    ListView listcombination;
+    ListView listcombination,listcombination2;
     UserMeasurment userMeasurment = new UserMeasurment();
 
     @Override
@@ -75,10 +78,17 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
         fn = (TextView) findViewById(R.id.tvfirstname);
         ln = (TextView) findViewById(R.id.tvlastname);
         ph = (TextView) findViewById(R.id.tvphonenumber);
+        ph.setOnClickListener(this);
         em = (TextView) findViewById(R.id.tvemailaddress);
+        em.setOnClickListener(this);
         iv = (ImageView) findViewById(R.id.image);
+        iv3 = (ImageView) findViewById(R.id.imageView3);
+        iv4 = (ImageView) findViewById(R.id.imageView4);
 
 
+        iv3.setOnClickListener(this);
+        iv4.setOnClickListener(this);
+        listcombination2 = (ListView) findViewById(R.id.listcombination2);
         listcombination = (ListView) findViewById(R.id.listcombination);
         showschedule = (Button) findViewById(R.id.bshowschedule);
         showschedule.setOnClickListener(this);
@@ -106,10 +116,11 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
 
             String fname = cursor.getString(usersDataSource.COL_FNAME);
             String lname = cursor.getString(usersDataSource.COL_LNAME);
-            String phone = cursor.getString(usersDataSource.COL_PHONE);
+            phone = "+"+cursor.getString(usersDataSource.COL_PHONE);
             String email = cursor.getString(usersDataSource.COL_EMAIL);
             String image = cursor.getString(usersDataSource.COL_IMAGE);
             Bitmap bmap = BitmapFactory.decodeFile(image);
+emailAdd = email;
 
 
             if (image != "") {
@@ -208,6 +219,42 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
+            case R.id.tvemailaddress:
+                String emailaddress[] = { emailAdd };
+                Intent emailIntent= new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL,emailaddress);
+
+                startActivity(emailIntent);
+
+                break;
+            case R.id.imageView4:
+              String  emailaddresse[] = { emailAdd }  ;
+                emailIntent= new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL,emailaddresse);
+
+                startActivity(emailIntent);
+
+                break;
+            case R.id.tvphonenumber:
+                Intent callIntent= new Intent(Intent.ACTION_CALL);
+//callIntent.setData(Uri.parse("tel:"+phonenumber));
+
+      callIntent.setData(Uri.parse("tel:"+phone));
+                startActivity(callIntent);
+
+
+                break;
+            case R.id.imageView3:
+                callIntent= new Intent(Intent.ACTION_CALL);
+
+                callIntent.setData(Uri.parse("tel:"+phone));
+                startActivity(callIntent);
+
+                break;
+
             case R.id.bedit:
                 Intent i;
                 String bread = String.valueOf(parser);
@@ -251,6 +298,7 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
             case R.id.bshowactivity:
 
                 listcombination.setVisibility(View.VISIBLE);
+                listcombination2.setVisibility(View.INVISIBLE);
 
                 set.setVisibility(View.INVISIBLE);
                 numberof.setVisibility(View.INVISIBLE);
@@ -289,8 +337,8 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
                 break;
 
             case R.id.bshowschedule:
-
-
+                listcombination.setVisibility(View.INVISIBLE);
+                listcombination2.setVisibility(View.VISIBLE);
 
 
                 set.setVisibility(View.INVISIBLE);
@@ -302,7 +350,7 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
 
                 add.setVisibility(View.INVISIBLE);
                 schedule.setVisibility(View.VISIBLE);
-                listcombination.setVisibility(View.VISIBLE);
+                listcombination2.setVisibility(View.VISIBLE);
                 Cursor cursora = usersDataSource.getRowfromschedule(parser);
                 Cursor usermeasurmenta = usersDataSource.getRowfromtabletwo(parser);
                 while (!cursora.isAfterLast()) {
@@ -310,11 +358,11 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
 
                     List<Schedule> usermeasurmentl = usersDataSource.getRowfromtablethree(parser);
                     adaptera = new ArrayAdapter<Schedule>(this, android.R.layout.simple_list_item_1, usermeasurmentl);
-                    listcombination.setAdapter(adaptera);
+                    listcombination2.setAdapter(adaptera);
 
                     cursora.moveToNext();
                 }
-                listcombination.setVisibility(View.VISIBLE);
+                listcombination2.setVisibility(View.VISIBLE);
                 break;
             case R.id.bsm:
                 createData();
@@ -354,4 +402,6 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
 
 
     }
+
+
 }

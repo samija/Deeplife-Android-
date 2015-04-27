@@ -1,7 +1,6 @@
 package Database;
 
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -54,7 +53,7 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
             COLUMN_LNAME + " TEXT, " +
             COLUMN_EMAIL + " TEXT, " +
             COLUMN_IMAGE + " TEXT, " +
-            COLUMN_PHONE + " NUMERIC " +")";
+            COLUMN_PHONE + " INTEGER " +")";
 
 
 
