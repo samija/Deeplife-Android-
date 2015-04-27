@@ -212,6 +212,15 @@ return users;
 
 
 
+    public int getuserscount() {
+        String countQuery = "SELECT  * FROM " + UsersDBOpenHelper.TABLE_USER;
+        SQLiteDatabase db = this.usersDBOpenHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+
+        // return count
+        return cursor.getCount();
+    }
 
 
     public Cursor getRow(int rowId) {
@@ -240,6 +249,10 @@ Cursor c = database.query(UsersDBOpenHelper.TABLE_USERMEASURMENT,allcolumnsfromt
         c.close();
         return userMeasurmentList;
     }
+
+
+
+
 
     public List<Schedule> getRowfromtablethree(int rowId) {
         List<Schedule> schedulelist = new ArrayList<Schedule>();

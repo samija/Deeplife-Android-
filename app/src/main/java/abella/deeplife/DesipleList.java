@@ -1,6 +1,7 @@
 package abella.deeplife;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,8 @@ public class DesipleList extends Activity implements View.OnClickListener {
     ImageView lm,di;
     ListView numberlist = null;
     TextView tv;
+Context context;
+
 
 
 
@@ -39,7 +42,7 @@ public class DesipleList extends Activity implements View.OnClickListener {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.desiplelist);
-
+context = this;
 
         tv = (TextView) findViewById(R.id.tv);
 
@@ -81,6 +84,7 @@ public class DesipleList extends Activity implements View.OnClickListener {
                 adapterum = new ArrayAdapter<UserMeasurment>(this, android.R.layout.simple_list_item_1, use);
                 numberlist.setAdapter(adapterum);
                 numberlist.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.btnshowdesiplesB:
 
@@ -101,21 +105,28 @@ try{
           */
 
 
-
+/*
                 ArrayAdapter<User> adapter;
                 final List<User> users = userdatasource.findall();
                 adapter = new ArrayAdapter<User>(this, R.layout.item_layout,R.id.tv, users);
-
                 numberlist.setAdapter(adapter);
                 numberlist.setVisibility(View.VISIBLE);
 
+*/
 
+/*
+             String []prgmimgs = { user.getImage().toString() };
+             String [] prgmnamelist={String.valueOf(userdatasource.findall())};
+numberlist.setAdapter(new CustomAdapter(this,prgmnamelist,prgmimgs));
+numberlist.setVisibility(View.VISIBLE);
+*/
 
+                final List<User> users = userdatasource.findall();
+              ContactImageAdapter  adapter = new ContactImageAdapter(this, R.layout.item_layout,
+                       users);
 
-
-
-            
-
+               numberlist.setAdapter(adapter);
+numberlist.setVisibility(View.VISIBLE);
 
     break;
 }}

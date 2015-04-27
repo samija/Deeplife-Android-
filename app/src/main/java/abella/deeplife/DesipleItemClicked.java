@@ -88,6 +88,10 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
 
         iv3.setOnClickListener(this);
         iv4.setOnClickListener(this);
+
+        iv3.setBackgroundResource(R.drawable.callrealt);
+        iv4.setBackgroundResource(R.drawable.mail);
+
         listcombination2 = (ListView) findViewById(R.id.listcombination2);
         listcombination = (ListView) findViewById(R.id.listcombination);
         showschedule = (Button) findViewById(R.id.bshowschedule);
