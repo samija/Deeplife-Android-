@@ -10,11 +10,11 @@
         android:id="@+id/linearLayout">
 
         <ImageView
-android:layout_marginLeft="-30dp"
+android:layout_marginLeft="0dp"
 
-
+android:scaleType="fitXY"
             android:layout_marginTop="50dp"
-            android:layout_width="100dp"
+            android:layout_width="50dp"
             android:layout_height="125dp"
             android:id="@+id/image"
             android:layout_below="@+id/bdelete"
@@ -27,11 +27,11 @@ android:layout_marginLeft="-30dp"
 
         <ImageView
             android:layout_marginTop="-15dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
             android:id="@+id/imageView3"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/call"
+            android:background="@drawable/callrealt"
             android:layout_marginLeft="50dp"/>
 
         <ImageView
@@ -42,7 +42,7 @@ android:layout_marginLeft="-30dp"
             android:layout_marginTop="135dp"
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:background="@drawable/email" />
+            android:background="@drawable/mail" />
 
     </LinearLayout>
 
@@ -248,5 +248,14 @@ android:typeface="serif"
         android:layout_alignRight="@+id/bschedule"
         android:layout_alignEnd="@+id/bschedule"
         android:layout_above="@+id/bedit" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/bhome"
+        android:background="@drawable/homeb"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/etno"
+        android:layout_alignStart="@+id/etno" />
 
 </RelativeLayout>

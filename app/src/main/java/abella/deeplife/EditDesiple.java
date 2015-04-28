@@ -30,7 +30,7 @@ Button update,editimage;
    UsersDataSource usersDataSource;
     ImageView imv;
     EditText fnn,lnn,phh,emm;
-String image,imagenew;
+String image,imagenew,imageuriholder;
     UsersDBOpenHelper usersDBOpenHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +76,9 @@ update = (Button) findViewById(R.id.bupdatedesiple);
 
             image = cursor.getString(usersDataSource.COL_IMAGE);
 
-            if (image != null) {
+            if (image.contains("/")) {
                 imv.setImageURI(Uri.parse(image));
+                imageuriholder = image;
                 try {
                     imv.setImageResource(Integer.parseInt(image));
                 } catch (Exception e) {
@@ -85,7 +86,7 @@ update = (Button) findViewById(R.id.bupdatedesiple);
                 }
 
             } else {
-                imv.setImageResource(R.drawable.desiple);
+                imv.setImageResource(R.drawable.avater1);
             }
 
 
@@ -114,17 +115,32 @@ update = (Button) findViewById(R.id.bupdatedesiple);
 
                 break;
             case R.id.bupdatedesiple:
-                String imageupdater;
-                if (imagenew==null){
-                    imageupdater = image;
-                }else{
-                   imageupdater = imagenew;
-                }
+try{
 
-                usersDataSource.updateEntry(parser,fnn.getText().toString(),lnn.getText().toString(),phh.getText().toString(),emm.getText().toString(),imageupdater);
-                Intent i = new Intent(EditDesiple.this,DesipleList.class);
-                Toast.makeText(this,"Update Sucess",Toast.LENGTH_SHORT).show();
-                startActivity(i);
+    String imageupdater = null;
+    if (imagenew==""){
+        imageupdater = imageuriholder;
+    }else if(imagenew.contains("/")){
+        imageupdater = imagenew;
+    }
+
+    usersDataSource.updateEntry(parser,fnn.getText().toString(),lnn.getText().toString(),phh.getText().toString(),emm.getText().toString(),imageupdater.toString());
+    Intent i = new Intent(EditDesiple.this,DesipleList.class);
+    Toast.makeText(this,"Update Sucess",Toast.LENGTH_SHORT).show();
+    startActivity(i);
+
+}catch(Exception e){
+
+
+    usersDataSource.updateEntry(parser,fnn.getText().toString(),lnn.getText().toString(),phh.getText().toString(),emm.getText().toString(),image);
+    Intent i = new Intent(EditDesiple.this,DesipleList.class);
+    Toast.makeText(this,"Update Sucess",Toast.LENGTH_SHORT).show();
+    startActivity(i);
+
+
+    e.printStackTrace();
+}
+
 
                 break;
         }
@@ -138,12 +154,13 @@ update = (Button) findViewById(R.id.bupdatedesiple);
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
-
-
-
-             imv.setImageURI(selectedImageUri);
+                imv.setImageURI(selectedImageUri);
                 imv.setVisibility(View.VISIBLE);
-             imagenew = selectedImagePath;
+
+
+    imagenew = selectedImagePath;
+
+
 
 
             }

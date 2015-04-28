@@ -3,6 +3,7 @@ package abella.deeplife;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,7 +27,7 @@ public class DesipleAdd extends Activity implements View.OnClickListener{
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
     ImageView imageview;
-
+Bitmap bm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -42,7 +43,7 @@ public class DesipleAdd extends Activity implements View.OnClickListener{
         add.setOnClickListener(this);
         show.setOnClickListener(this);
         getimage.setOnClickListener(this);
-imageview.setImageResource(R.drawable.desiple);
+imageview.setImageResource(R.drawable.avater1);
     }
 
     private void initialize() {
@@ -68,8 +69,9 @@ getimage= (Button)findViewById(R.id.bimage);
         if (selectedImagePath!=null){
 
             user.setImage(selectedImagePath);
+
         }else{
-            selectedImagePath = String.valueOf(R.drawable.desiple);
+            selectedImagePath = String.valueOf(R.drawable.avater1);
             user.setImage(selectedImagePath);
         }
 
@@ -89,7 +91,7 @@ getimage= (Button)findViewById(R.id.bimage);
                 phonenumber.setText("");
                 email.setText("");
                 selectedImagePath = null;
-              imageview.setImageResource(R.drawable.desiple);
+               imageview.setImageResource(R.drawable.avater1);
 
                 break;
             }
@@ -120,8 +122,8 @@ getimage= (Button)findViewById(R.id.bimage);
                 selectedImagePath = getPath(selectedImageUri);
 
 
-               imageview.setImageResource(0);
-                imageview.setImageURI(selectedImageUri);
+                   imageview.setImageResource(0);
+                   imageview.setImageURI(selectedImageUri);
 
 
 
@@ -137,6 +139,7 @@ getimage= (Button)findViewById(R.id.bimage);
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
+
 
 
 

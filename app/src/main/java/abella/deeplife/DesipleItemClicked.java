@@ -24,6 +24,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 import Database.Schedule;
@@ -36,6 +38,7 @@ import Database.UsersDataSource;
 public class DesipleItemClicked extends Activity implements View.OnClickListener {
     String emailAdd;
    String phone;
+    Bitmap bmap;
    int phonenumber;
     Canvas canvas;
     Button set;
@@ -43,7 +46,7 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
     EditText numberof;
     UsersDataSource usersDataSource;
     int parser;
-    Button edit, delete, add, show, schedule, showschedule;
+    Button edit, delete, add, show, schedule, showschedule,home;
     String gotbread;
     TextView fn, ln, ph, em, informer;
     ImageView iv,iv3,iv4;
@@ -51,7 +54,7 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
     ArrayAdapter<Schedule> adaptera;
     ListView listcombination,listcombination2;
     UserMeasurment userMeasurment = new UserMeasurment();
-
+    String image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -84,13 +87,12 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
         iv = (ImageView) findViewById(R.id.image);
         iv3 = (ImageView) findViewById(R.id.imageView3);
         iv4 = (ImageView) findViewById(R.id.imageView4);
-
-
+home = (Button)findViewById(R.id.bhome);
+home.setOnClickListener(this);
         iv3.setOnClickListener(this);
         iv4.setOnClickListener(this);
 
-        iv3.setBackgroundResource(R.drawable.callrealt);
-        iv4.setBackgroundResource(R.drawable.mail);
+
 
         listcombination2 = (ListView) findViewById(R.id.listcombination2);
         listcombination = (ListView) findViewById(R.id.listcombination);
@@ -108,9 +110,14 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
         show = (Button) findViewById(R.id.bshowactivity);
         show.setOnClickListener(this);
 
+try{
+
+}catch (Exception e){
+    e.printStackTrace();
+    Toast.makeText(this,"File Too Large",Toast.LENGTH_SHORT).show();
+}
 
         interfaceview(parser);
-
     }
 
     private void interfaceview(int idInDB) {
@@ -122,31 +129,29 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
             String lname = cursor.getString(usersDataSource.COL_LNAME);
             phone = "+"+cursor.getString(usersDataSource.COL_PHONE);
             String email = cursor.getString(usersDataSource.COL_EMAIL);
-            String image = cursor.getString(usersDataSource.COL_IMAGE);
-            Bitmap bmap = BitmapFactory.decodeFile(image);
-emailAdd = email;
+            image = cursor.getString(usersDataSource.COL_IMAGE);
 
 
-            if (image != "") {
-            //    iv.setImageURI(Uri.parse(image));
+           emailAdd = email;
+
+
+            if (image.contains("/")) {
+              //iv.setImageURI(Uri.parse(image));
 
                 try {
-                   //iv.setImageResource(Integer.parseInt(image));
-                    getCircleCroppedBitmap(bmap);
+
+
+                   Bitmap bmap =  decodeFile(image);
+                   getCircleCroppedBitmap(bmap);
                 } catch (Exception e) {
-                    iv.setImageResource(R.drawable.desiple);
                     e.printStackTrace();
-                }finally{
 
                 }
 
             } else if (image.contentEquals("")) {
-               iv.setImageResource(R.drawable.desiple);
+              iv.setImageURI(Uri.parse(image));
 
             }
-
-
-
 
 
 
@@ -157,36 +162,94 @@ emailAdd = email;
         }
         cursor.close();
 
+    }
 
+    private Bitmap decodeFile(String f) throws IOException {
+        Bitmap b = null;
 
+        //Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
 
+        FileInputStream fis = new FileInputStream(f);
+        BitmapFactory.decodeStream(fis, null, o);
+        fis.close();
 
+        int scale = 1;
+        if (o.outHeight > 1000 || o.outWidth > 1000) {
+            scale = (int)Math.pow(2, (int) Math.ceil(Math.log(1000 /
+                    (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
+        }
+
+        //Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        fis = new FileInputStream(f);
+        b = BitmapFactory.decodeStream(fis, null, o2);
+        fis.close();
+
+        return b;
     }
 
 
-    private  Bitmap getCircleCroppedBitmap(Bitmap bitmap) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
 
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-                bitmap.getWidth() / 2, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-        iv.setImageBitmap(output);
 
-        //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
-        //return _bmp;
-        return output;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private Bitmap getCircleCroppedBitmap(Bitmap bitmap) {
+        try{
+            Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                    bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(output);
+
+            final int color = 0xff424242;
+            final Paint paint = new Paint();
+            final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+            paint.setAntiAlias(true);
+            canvas.drawARGB(0, 0, 0, 0);
+            paint.setColor(color);
+            // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+            canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
+                    bitmap.getWidth() / 2, paint);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(bitmap, rect, rect, paint);
+            iv.setImageBitmap(output);
+
+            //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
+            //return _bmp;
+            return output;
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(this,"Image Too Large To Handle",Toast.LENGTH_SHORT).show();
+
+        }
+        return null;
     }
+
 
 
 
@@ -217,7 +280,7 @@ emailAdd = email;
     @Override
     protected void onPause() {
         super.onPause();
-      // finish();
+finish();
     }
 
     @Override
@@ -244,7 +307,7 @@ emailAdd = email;
                 break;
             case R.id.tvphonenumber:
                 Intent callIntent= new Intent(Intent.ACTION_CALL);
-//callIntent.setData(Uri.parse("tel:"+phonenumber));
+               //callIntent.setData(Uri.parse("tel:"+phonenumber));
 
       callIntent.setData(Uri.parse("tel:"+phone));
                 startActivity(callIntent);
@@ -331,6 +394,7 @@ emailAdd = email;
 
                 break;
             case R.id.bschedule:
+                /*
                 dbkeya = String.valueOf(parser);
                 holdera = new Bundle();
                 holdera.putString("key", dbkeya);
@@ -338,6 +402,7 @@ emailAdd = email;
                 Intent ix = new Intent(DesipleItemClicked.this, Scheduler.class);
                 ix.putExtras(holdera);
                 startActivity(ix);
+                */
                 break;
 
             case R.id.bshowschedule:
@@ -377,6 +442,10 @@ emailAdd = email;
                 break;
             case R.id.cbotoe:
                 a.setChecked(false);
+                break;
+            case R.id.bhome:
+                Intent gy = new Intent(DesipleItemClicked.this,DesipleList.class);
+                startActivity(gy);
                 break;
 
         }

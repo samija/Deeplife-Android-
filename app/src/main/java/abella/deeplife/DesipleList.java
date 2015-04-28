@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class DesipleList extends Activity implements View.OnClickListener {
     ListView numberlist = null;
     TextView tv;
 Context context;
-
+    ContactImageAdapter  adapter;
 
 
 
@@ -68,6 +69,11 @@ context = this;
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+finish();
+    }
 
     @Override
     public void onClick(View view) {
@@ -88,45 +94,12 @@ context = this;
                 break;
             case R.id.btnshowdesiplesB:
 
-
-
-/*
-try{
-    Cursor us = userdatasource.getRow(2);
-    String gh = us.getString(userdatasource.COL_IMAGE).toString();
-    Toast.makeText(this, gh, Toast.LENGTH_SHORT).show();
-
-    di.setImageURI(Uri.parse(gh));
-
-}catch (Exception e) {
-    e.printStackTrace();
-}
-
-          */
-
-
-/*
-                ArrayAdapter<User> adapter;
                 final List<User> users = userdatasource.findall();
-                adapter = new ArrayAdapter<User>(this, R.layout.item_layout,R.id.tv, users);
+                adapter = new ContactImageAdapter(DesipleList.this, R.layout.item_layout,
+                        users);
+
                 numberlist.setAdapter(adapter);
                 numberlist.setVisibility(View.VISIBLE);
-
-*/
-
-/*
-             String []prgmimgs = { user.getImage().toString() };
-             String [] prgmnamelist={String.valueOf(userdatasource.findall())};
-numberlist.setAdapter(new CustomAdapter(this,prgmnamelist,prgmimgs));
-numberlist.setVisibility(View.VISIBLE);
-*/
-
-                final List<User> users = userdatasource.findall();
-              ContactImageAdapter  adapter = new ContactImageAdapter(this, R.layout.item_layout,
-                       users);
-
-               numberlist.setAdapter(adapter);
-numberlist.setVisibility(View.VISIBLE);
 
     break;
 }}
@@ -134,26 +107,62 @@ numberlist.setVisibility(View.VISIBLE);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void onButtonClickListner(View v) {
-        final List<User> users = userdatasource.findall();
-        View parentRow = (View) v.getParent();
-        ListView listView = (ListView) parentRow.getParent();
-        final int position = listView.getPositionForView(parentRow);
+
+        try{
+            final List<User> users = userdatasource.findall();
+            View parentRow = (View) v.getParent();
+            ListView listView = (ListView) parentRow.getParent();
+            final int position = listView.getPositionForView(parentRow);
 
 
-        User current = users.get(position);
-        TextView tx = (TextView) findViewById(R.id.tvreavel1);
-        tx.setText("" + current.id);
+            User current = users.get(position);
+            TextView tx = (TextView) findViewById(R.id.tvreavel1);
+            tx.setText("" + current.id);
 
 
 
 
-        String bread = tx.getText().toString();
-        Bundle basket = new Bundle();
-        basket.putString("key", bread);
-        Intent i;
-        i = new Intent(DesipleList.this, DesipleItemClicked.class);
-        i.putExtras(basket);
-    startActivity(i);
+            String bread = tx.getText().toString();
+            Bundle basket = new Bundle();
+            basket.putString("key", bread);
+            Intent i;
+            i = new Intent(DesipleList.this, DesipleItemClicked.class);
+            i.putExtras(basket);
+            startActivity(i);
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(this,"File Too Large To Be Handled",Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }
