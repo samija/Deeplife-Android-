@@ -256,6 +256,8 @@ android:typeface="serif"
         android:background="@drawable/homeb"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/etno"
-        android:layout_alignStart="@+id/etno" />
+        android:layout_alignStart="@+id/etno"
+        android:visibility="invisible"
+     />
 
 </RelativeLayout>

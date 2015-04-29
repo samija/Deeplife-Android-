@@ -101,27 +101,28 @@
         android:ems="10"
         android:id="@+id/etemailaddress"
         android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/etphonenumber"
-        android:layout_alignStart="@+id/etphonenumber" />
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:id="@+id/imageView"
         android:paddingRight="10dp"
         android:layout_below="@+id/etemailaddress"
+        android:layout_alignBottom="@+id/Bshow"
         android:layout_alignLeft="@+id/etemailaddress"
         android:layout_alignStart="@+id/etemailaddress"
-        android:layout_alignRight="@+id/etemailaddress"
-        android:layout_alignEnd="@+id/etemailaddress"
-        android:layout_alignBottom="@+id/Bshow" />
+        android:layout_alignRight="@+id/etfirstname"
+        android:layout_alignEnd="@+id/etfirstname"
+        android:onClick="onimageclicked"/>
 
     <Button
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:id="@+id/bimage"
         android:background="@drawable/upload2"
-
+android:visibility="invisible"
         android:layout_below="@+id/etemailaddress"
         android:layout_alignRight="@+id/Badd"
         android:layout_alignEnd="@+id/Badd" />

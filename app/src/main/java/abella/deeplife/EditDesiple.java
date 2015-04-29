@@ -3,6 +3,8 @@ package abella.deeplife;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import Database.UsersDBOpenHelper;
 import Database.UsersDataSource;
@@ -75,19 +80,27 @@ update = (Button) findViewById(R.id.bupdatedesiple);
             String email = cursor.getString(usersDataSource.COL_EMAIL);
 
             image = cursor.getString(usersDataSource.COL_IMAGE);
+            try {
+                Bitmap bm = decodeFile(image);
+                Bitmap  bmscaled = Bitmap.createScaledBitmap(bm, 50, 40, true);
+                //if image is not null
+                if (image.contains("/")) {
+                    //imv.setImageURI(Uri.parse(image));
+                    imv.setImageBitmap(bmscaled);
+                    imageuriholder = image;
+                    try {
+                        imv.setImageResource(Integer.parseInt(image));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-            if (image.contains("/")) {
-                imv.setImageURI(Uri.parse(image));
-                imageuriholder = image;
-                try {
-                    imv.setImageResource(Integer.parseInt(image));
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-
-            } else {
+            } catch (IOException e) {
+                e.printStackTrace();
                 imv.setImageResource(R.drawable.avater1);
+
             }
+
 
 
 
@@ -154,7 +167,19 @@ try{
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
-                imv.setImageURI(selectedImageUri);
+
+
+                try {
+                  Bitmap  bm = decodeFile(getPath(selectedImageUri));
+                    //resize z bitmap to ma imageview fo btr performance
+                    Bitmap bmscaled = Bitmap.createScaledBitmap(bm,100,75,true);
+                    imv.setImageBitmap(bmscaled);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+              //  imv.setImageURI(selectedImageUri);
                 imv.setVisibility(View.VISIBLE);
 
 
@@ -176,7 +201,32 @@ try{
         return cursor.getString(column_index);
     }
 
+    private Bitmap decodeFile(String f) throws IOException {
+        Bitmap b = null;
 
+        //Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+
+        FileInputStream fis = new FileInputStream(f);
+        BitmapFactory.decodeStream(fis, null, o);
+        fis.close();
+
+        int scale = 1;
+        if (o.outHeight > 1000 || o.outWidth > 1000) {
+            scale = (int) Math.pow(2, (int) Math.ceil(Math.log(1000 /
+                    (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
+        }
+
+        //Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        fis = new FileInputStream(f);
+        b = BitmapFactory.decodeStream(fis, null, o2);
+        fis.close();
+
+        return b;
+    }
 
 
 }

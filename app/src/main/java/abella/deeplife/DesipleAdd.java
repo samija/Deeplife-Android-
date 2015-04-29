@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +14,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import Database.User;
 import Database.UsersDataSource;
@@ -73,6 +77,7 @@ getimage= (Button)findViewById(R.id.bimage);
         }else{
             selectedImagePath = String.valueOf(R.drawable.avater1);
             user.setImage(selectedImagePath);
+
         }
 
 
@@ -121,11 +126,18 @@ getimage= (Button)findViewById(R.id.bimage);
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
 
-
+//befit yeneberewen image clear lemareg
                    imageview.setImageResource(0);
-                   imageview.setImageURI(selectedImageUri);
+                //   imageview.setImageURI(selectedImageUri);
 
-
+                try {
+                    Bitmap  bm = decodeFile(getPath(selectedImageUri));
+                    //resize z bitmap to ma imageview fo btr performance
+                    Bitmap bmscaled = Bitmap.createScaledBitmap(bm,200,200,true);
+                    imageview.setImageBitmap(bmscaled);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         }
@@ -142,7 +154,41 @@ getimage= (Button)findViewById(R.id.bimage);
 
 
 
+    private Bitmap decodeFile(String f) throws IOException {
+        Bitmap b = null;
+
+        //Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+
+        FileInputStream fis = new FileInputStream(f);
+        BitmapFactory.decodeStream(fis, null, o);
+        fis.close();
+
+        int scale = 1;
+        if (o.outHeight > 1000 || o.outWidth > 1000) {
+            scale = (int) Math.pow(2, (int) Math.ceil(Math.log(1000 /
+                    (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
+        }
+
+        //Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        fis = new FileInputStream(f);
+        b = BitmapFactory.decodeStream(fis, null, o2);
+        fis.close();
+
+        return b;
+    }
 
 
+    public void onimageclicked(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
 
+        startActivityForResult(
+                Intent.createChooser(intent, "Select Picture"),
+                SELECT_PICTURE);
+    }
 }

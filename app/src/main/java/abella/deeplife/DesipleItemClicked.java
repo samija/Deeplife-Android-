@@ -148,8 +148,8 @@ try{
 
                 }
 
-            } else if (image.contentEquals("")) {
-              iv.setImageURI(Uri.parse(image));
+            } else {
+              iv.setImageResource(R.drawable.avater1);
 
             }
 
@@ -277,11 +277,6 @@ try{
 
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-finish();
-    }
 
     @Override
     public void onClick(View view) {

@@ -96,9 +96,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-  android:visibility="invisible"
+        android:visibility="invisible"
         android:background="#0099cc"
         android:layout_below="@+id/badddesipleB"
+        android:isScrollContainer="false"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="false"
+
+
         android:layout_above="@+id/linearLayout4" />
 
 
@@ -127,6 +132,27 @@
         android:layout_height="wrap_content"
         android:background="@drawable/dplogo2"
         android:layout_alignTop="@+id/linearLayout4"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView5" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_alignTop="@+id/listView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Loading..."
+        android:id="@+id/textView16"
+        android:layout_alignTop="@+id/listView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:textColor="#ff0b0b0b" />
+
 
 </RelativeLayout>

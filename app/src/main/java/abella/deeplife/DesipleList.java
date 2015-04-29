@@ -3,6 +3,7 @@ package abella.deeplife;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,7 @@ import Database.UsersDataSource;
 /**
  * Created by Ab on 4/10/2015.
  */
-public class DesipleList extends Activity implements View.OnClickListener {
+public class DesipleList extends Activity implements View.OnClickListener{
     Button add, desiples, activities;
     int pars = 0;
     UsersDataSource userdatasource;
@@ -33,8 +35,8 @@ public class DesipleList extends Activity implements View.OnClickListener {
     TextView tv;
 Context context;
     ContactImageAdapter  adapter;
-
-
+ProgressBar pb;
+TextView tc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +45,14 @@ Context context;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.desiplelist);
+
 context = this;
 
         tv = (TextView) findViewById(R.id.tv);
-
+pb = (ProgressBar)findViewById(R.id.progressBar);
+        pb.setVisibility(View.INVISIBLE);
+        tc = (TextView)findViewById(R.id.textView16);
+        tc.setVisibility(View.INVISIBLE);
         di = (ImageView) findViewById(R.id.imageView2);
         activities = (Button) findViewById(R.id.btnshowactivitiesB);
         activities.setOnClickListener(this);
@@ -60,6 +66,7 @@ context = this;
         lm = (ImageView)findViewById(R.id.loginimage);
 
         numberlist = (ListView) findViewById(R.id.listView);
+
         userdatasource = new UsersDataSource(this);
         userdatasource.open();
 
@@ -69,11 +76,7 @@ context = this;
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-finish();
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -94,42 +97,47 @@ finish();
                 break;
             case R.id.btnshowdesiplesB:
 
-                final List<User> users = userdatasource.findall();
-                adapter = new ContactImageAdapter(DesipleList.this, R.layout.item_layout,
-                        users);
 
-                numberlist.setAdapter(adapter);
-                numberlist.setVisibility(View.VISIBLE);
+
+new BitmapWorkerTask().execute();
+
+
 
     break;
 }}
 
+    class BitmapWorkerTask extends AsyncTask<Void,Void,Void > {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+                pb.setVisibility(View.VISIBLE);
+                tc.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            final List<User> users = userdatasource.findall();
+            adapter = new ContactImageAdapter(DesipleList.this, R.layout.item_layout,
+                    users);
+            tc.setVisibility(View.VISIBLE);
+            pb.setVisibility(View.VISIBLE);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numberlist.setAdapter(adapter);
+            numberlist.setVisibility(View.VISIBLE);
+            pb.setVisibility(View.INVISIBLE);
+            tc.setVisibility(View.INVISIBLE);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+    }
 
 
 
@@ -150,7 +158,6 @@ finish();
 
 
 
-
             String bread = tx.getText().toString();
             Bundle basket = new Bundle();
             basket.putString("key", bread);
@@ -165,4 +172,7 @@ finish();
 
 
     }
+
+
+
 }
