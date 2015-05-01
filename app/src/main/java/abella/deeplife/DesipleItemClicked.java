@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -69,6 +70,7 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
         b.setOnClickListener(this);
         numberof = (EditText) findViewById(R.id.etno);
         informer = (TextView) findViewById(R.id.tvinformer);
+        informer.setTypeface(Typeface.createFromAsset(this.getAssets(), "mafont2.ttf"));
         usersDataSource = new UsersDataSource(this);
         usersDataSource.open();
 
@@ -79,10 +81,14 @@ public class DesipleItemClicked extends Activity implements View.OnClickListener
 
         //initializer
         fn = (TextView) findViewById(R.id.tvfirstname);
+        fn.setTypeface(Typeface.createFromAsset(this.getAssets(), "mafont2.ttf"));
         ln = (TextView) findViewById(R.id.tvlastname);
+        ln.setTypeface(Typeface.createFromAsset(this.getAssets(), "mafont2.ttf"));
         ph = (TextView) findViewById(R.id.tvphonenumber);
+        ph.setTypeface(Typeface.createFromAsset(this.getAssets(), "mafont2.ttf"));
         ph.setOnClickListener(this);
         em = (TextView) findViewById(R.id.tvemailaddress);
+        em.setTypeface(Typeface.createFromAsset(this.getAssets(), "mafont2.ttf"));
         em.setOnClickListener(this);
         iv = (ImageView) findViewById(R.id.image);
         iv3 = (ImageView) findViewById(R.id.imageView3);
@@ -389,7 +395,7 @@ try{
 
                 break;
             case R.id.bschedule:
-                /*
+
                 dbkeya = String.valueOf(parser);
                 holdera = new Bundle();
                 holdera.putString("key", dbkeya);
@@ -397,7 +403,7 @@ try{
                 Intent ix = new Intent(DesipleItemClicked.this, Scheduler.class);
                 ix.putExtras(holdera);
                 startActivity(ix);
-                */
+
                 break;
 
             case R.id.bshowschedule:

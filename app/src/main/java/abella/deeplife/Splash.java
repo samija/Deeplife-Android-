@@ -34,7 +34,7 @@ public class Splash extends Activity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
-                    Intent i = new Intent(Splash.this,DesipleList.class);
+                    Intent i = new Intent(Splash.this,Login.class);
                     startActivity(i);
 
                 }

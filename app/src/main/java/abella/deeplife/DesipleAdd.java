@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -52,12 +53,12 @@ imageview.setImageResource(R.drawable.avater1);
 
     private void initialize() {
 code = (EditText)findViewById(R.id.etcc);
-        firstname = (EditText)findViewById(R.id.etfirstname);
-        lastname = (EditText)findViewById(R.id.etlastname);
-        phonenumber = (EditText)findViewById(R.id.etphonenumber);
-        email = (EditText)findViewById(R.id.etemailaddress);
-        add = (Button)findViewById(R.id.Badd);
-        show= (Button)findViewById(R.id.Bshow);
+        firstname = (EditText)findViewById(R.id.etfirstnamel);
+        lastname = (EditText)findViewById(R.id.etlastnamel);
+        phonenumber = (EditText)findViewById(R.id.etphonenumberl);
+        email = (EditText)findViewById(R.id.etemailaddressl);
+        add = (Button)findViewById(R.id.Baddl);
+        show= (Button)findViewById(R.id.Bshowl);
 getimage= (Button)findViewById(R.id.bimage);
       imageview = (ImageView)findViewById(R.id.imageView);
     }
@@ -88,19 +89,41 @@ getimage= (Button)findViewById(R.id.bimage);
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.Badd: {
-                createData();
-                code.setText("");
-                firstname.setText("");
-                lastname.setText("");
-                phonenumber.setText("");
-                email.setText("");
-                selectedImagePath = null;
-               imageview.setImageResource(R.drawable.avater1);
+            case R.id.Baddl: {
+                //checks if first name or last name have values befor registering
+                String fn,ln;
+                fn =firstname.getText().toString();
+                ln = lastname.getText().toString();
+
+                if(!fn.equals("")){
+                    createData();
+                    code.setText("");
+                    firstname.setText("");
+                    lastname.setText("");
+                    phonenumber.setText("");
+                    email.setText("");
+                    selectedImagePath = null;
+                    imageview.setImageResource(R.drawable.avater1);
+
+                }else if(!ln.equals("")){
+                    createData();
+                    code.setText("");
+                    firstname.setText("");
+                    lastname.setText("");
+                    phonenumber.setText("");
+                    email.setText("");
+                    selectedImagePath = null;
+                    imageview.setImageResource(R.drawable.avater1);
+                }else{
+                    Toast.makeText(this,"Please Fill Desiple Name",Toast.LENGTH_SHORT).show();
+                }
+
+
+
 
                 break;
             }
-            case R.id.Bshow: {
+            case R.id.Bshowl: {
                 Intent i = new Intent(DesipleAdd.this, DesipleList.class);
                 startActivity(i);
                 break;
@@ -109,7 +132,6 @@ getimage= (Button)findViewById(R.id.bimage);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-
                 startActivityForResult(
                         Intent.createChooser(intent, "Select Picture"),
                         SELECT_PICTURE);

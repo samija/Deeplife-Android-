@@ -48,8 +48,14 @@ String image,imagenew,imageuriholder;
 
 
 
+
         usersDataSource = new UsersDataSource(this);
         usersDataSource.open();
+
+
+        //find z login pic n name
+
+
 
         Bundle gotbasket = getIntent().getExtras();
         gotbread = gotbasket.getString("nun");
@@ -68,6 +74,8 @@ update = (Button) findViewById(R.id.bupdatedesiple);
        handle(parser);
 
     }
+
+
 
     private void handle(int parse) {
 

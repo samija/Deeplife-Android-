@@ -17,7 +17,7 @@ import java.util.Calendar;
 public class ScheduleClient {
 
 	// The hook into our service
-	private ScheduleService mBoundService;
+	private ScheduleService mBoundService = new ScheduleService();
 	// The context to start the service in
 	private Context mContext;
 	// A flag if we are connected to the service or not
@@ -57,6 +57,7 @@ public class ScheduleClient {
 	 * @param c a date to set the notification for
 	 */
 	public void setAlarmForNotification(Calendar c){
+
 		mBoundService.setAlarm(c);
 
 

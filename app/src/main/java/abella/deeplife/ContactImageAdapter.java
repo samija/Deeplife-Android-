@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.List;
 import Database.User;
 
 public class ContactImageAdapter extends ArrayAdapter<User> {
+    public int getnumberofdesiples = 0;
     Bitmap bmscaled,bm;
 String hackstr;
 
@@ -50,13 +52,14 @@ String hackstr;
             holder = new ImageHolder();
             holder.txtTitle = (TextView) row.findViewById(R.id.tv);
             holder.imgIcon = (ImageView) row.findViewById(R.id.imageView2);
+            holder.txtTitle.setTypeface(Typeface.createFromAsset(context.getAssets(), "mafont2.ttf"));
             row.setTag(holder);
         } else {
             holder = (ImageHolder) row.getTag();
         }
         picture = data.get(position);
         hackstr = picture.image;
-        holder.txtTitle.setText(picture.fname + " " + picture.lname + "\n+" + picture.phone +"\n"+ picture.email);
+        holder.txtTitle.setText("   " +picture.fname + " " + picture.lname + "\n\n   +" + picture.phone +"\n\n   "+ picture.email);
 
 
 
@@ -72,10 +75,10 @@ String hackstr;
                 //   resize z bitmap to ma imgview fo btr performance
                 bmscaled = Bitmap.createScaledBitmap(bm, 80, 75, true);
                 holder.imgIcon.setImageBitmap(bmscaled);
-                holder.txtTitle.setText(picture.fname + " " + picture.lname + "\n+" + picture.phone +"\n"+ picture.email);
+
             }else{
                 holder.imgIcon.setImageResource(R.drawable.avater1);
-                holder.txtTitle.setText(picture.fname + " " + picture.lname + "\n+" + picture.phone +"\n"+ picture.email);
+
             }
 
         } catch (OutOfMemoryError e) {
@@ -87,10 +90,10 @@ String hackstr;
                     bm = decodeFile(picture.image);
                     bmscaled = Bitmap.createScaledBitmap(bm,80,75 ,true);
                     holder.imgIcon.setImageBitmap(bmscaled);
-                    holder.txtTitle.setText(picture.fname + " " + picture.lname + "\n+" + picture.phone +"\n"+ picture.email);
+
                 }else{
                     holder.imgIcon.setImageResource(R.drawable.avater1);
-                    holder.txtTitle.setText(picture.fname + " " + picture.lname + "\n+" + picture.phone +"\n"+ picture.email);
+
                 }
 
             } catch (IOException e1) {
@@ -104,7 +107,7 @@ String hackstr;
 
       //*for future use*  new BitmapWorkerTask().execute();
       //  new BitmapWorkerTask().execute();
-
+getnumberofdesiples+=1;
         return row;
     }
 
@@ -168,6 +171,8 @@ String hackstr;
     static class ImageHolder {
         ImageView imgIcon;
         TextView txtTitle;
+
+
     }
 
 }

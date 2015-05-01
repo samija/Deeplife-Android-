@@ -33,7 +33,7 @@ public class NotifyService extends Service {
 	// Name of an intent extra we can use to identify if this service was started to create a notification	
 	public static final String INTENT_NOTIFY = "com.blundell.tut.service.INTENT_NOTIFY";
 	// The system notification manager
-	private NotificationManager mNM;
+	public NotificationManager mNM ;
 
 	@Override
 	public void onCreate() {

@@ -15,11 +15,13 @@ import java.util.List;
  */
 public class UsersDataSource {
     private static final String LOGTAG = "EXPLOREUSER";
-
+    //to get how many disiples are there n its static cuz kelela class access lemareg :p
+    public static int getnumofdesiples;
+    public static int getnumofactivities;
    SQLiteOpenHelper dbhelper;
    public SQLiteDatabase database;
 UsersDBOpenHelper usersDBOpenHelper;
-//for retriving from table one
+//for retriving from desiple user
 private static final String[] allColumns = {
         UsersDBOpenHelper.COLUMN_LNAME,
         UsersDBOpenHelper.COLUMN_ID,
@@ -28,7 +30,7 @@ private static final String[] allColumns = {
         UsersDBOpenHelper.COLUMN_EMAIL,
         UsersDBOpenHelper.COLUMN_IMAGE};
 
-//for retriving form table two
+//for retriving from usermeasurment evangelism mnamn
 private static final String[] allcolumnsfromtabletwo = {
         UsersDBOpenHelper.COLUMN_IDMEASURMENT,
         UsersDBOpenHelper.COLUMN_METHOD,
@@ -48,9 +50,21 @@ private static final String[] allcolumnsfromtabletwo = {
             UsersDBOpenHelper.COLUMN_MINUTE};
 
 
+    private static final String[] allColumnsLogin = {
+            UsersDBOpenHelper.COLUMN_LNAMEL,
+            UsersDBOpenHelper.COLUMN_IDL,
+            UsersDBOpenHelper.COLUMN_FNAMEL,
+            UsersDBOpenHelper.COLUMN_PHONEL,
+            UsersDBOpenHelper.COLUMN_EMAILL,
+            UsersDBOpenHelper.COLUMN_IMAGEL};
+    public static final int COL_FNAMEL = 2;
+    public static final int COL_LNAMEL = 0;
+    public static final int COL_IMAGEL = 5;
+
     public static final String KEY_ROWID = "userId";
     public static final String KEY_ROWIDUM = "useridmeasurment";
     public static final String KEY_ROWIDSCHEDULE = "useridschedule";
+    public static final String KEY_ROWIDLOGIN = "useridlogin";
 
     public static final int COL_ROWID = 0;
 
@@ -106,6 +120,22 @@ public UsersDataSource(Context context){
 return user;
     }
 
+
+    public UserLogin createlogin(UserLogin userLogin){
+        ContentValues values = new ContentValues();
+        values.put(UsersDBOpenHelper.COLUMN_FNAMEL,userLogin.getFnamel());
+        values.put(UsersDBOpenHelper.COLUMN_LNAMEL,userLogin.getLnamel());
+       // values.put(UsersDBOpenHelper.COLUMN_PHONEL,user.getPhone());
+      //  values.put(UsersDBOpenHelper.COLUMN_EMAILL,user.getEmail());
+        values.put(UsersDBOpenHelper.COLUMN_IMAGEL,userLogin.getImagel());
+        values.put(UsersDBOpenHelper.COLUMN_IDL,userLogin.getIdl());
+        int insertid = (int) database.insert(UsersDBOpenHelper.TABLE_USERLOGIN,null,values);
+        userLogin.setIdl(insertid);
+        return userLogin;
+    }
+
+
+
     public UserMeasurment createtabletwo(UserMeasurment userMeasurment){
         ContentValues value = new ContentValues();
         value.put(UsersDBOpenHelper.COLUMN_METHOD,userMeasurment.getMethod());
@@ -143,6 +173,8 @@ List<User> users = new ArrayList<User>();
 
     Cursor cursor = database.query(UsersDBOpenHelper.TABLE_USER,allColumns,null,null,null,null,null,null);
 Log.i(LOGTAG,"returned "+ cursor.getCount() + " rows");
+    getnumofdesiples = cursor.getCount();
+
 if (cursor.getCount() >0){
 while (cursor.moveToNext()){
     User user = new User();
@@ -161,10 +193,44 @@ while (cursor.moveToNext()){
 return users;
 }
 
+
+
+    public List<UserLogin> findalllogins(){
+        List<UserLogin> userLogins = new ArrayList<UserLogin>();
+
+        Cursor cursor = database.query(UsersDBOpenHelper.TABLE_USERLOGIN,allColumnsLogin,null,null,null,null,null,null);
+        Log.i(LOGTAG,"returned "+ cursor.getCount() + " rows");
+
+
+        if (cursor.getCount() >0){
+            while (cursor.moveToNext()){
+                UserLogin userLogin = new UserLogin();
+                userLogin.setIdl(cursor.getInt(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_IDL.toString())));
+                userLogin.setFnamel(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_FNAMEL.toString())));
+                userLogin.setLnamel(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_LNAMEL)));
+                userLogin.setImagel(cursor.getString(cursor.getColumnIndex(UsersDBOpenHelper.COLUMN_IMAGEL)));
+
+                userLogins.add(userLogin);
+            }
+
+        }
+
+        return userLogins;
+    }
+
+
+
+
+
+
+
+
+
     public List<UserMeasurment> findallusermeasurment(){
         List<UserMeasurment> userMeasurments = new ArrayList<UserMeasurment>();
 
         Cursor cursor = database.query(UsersDBOpenHelper.TABLE_USERMEASURMENT,allcolumnsfromtabletwo,null,null,null,null,null,null);
+        getnumofactivities = cursor.getCount();
         Log.i(LOGTAG,"returned "+ cursor.getCount() + " rows");
         if (cursor.getCount() >0){
             while (cursor.moveToNext()){
@@ -226,6 +292,17 @@ return users;
     public Cursor getRow(int rowId) {
         String where = KEY_ROWID + "=" + rowId;
         Cursor c = 	database.query(true, UsersDBOpenHelper.TABLE_USER, allColumns,
+                where, null, null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+
+
+    public Cursor getRowl(int rowIdl) {
+        String where = KEY_ROWIDLOGIN + "=" + rowIdl;
+        Cursor c = 	database.query(true, UsersDBOpenHelper.TABLE_USERLOGIN, allColumnsLogin,
                 where, null, null, null, null, null);
         if (c != null) {
             c.moveToFirst();

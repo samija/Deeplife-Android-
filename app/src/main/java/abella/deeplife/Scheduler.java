@@ -71,8 +71,8 @@ public class Scheduler extends Activity{
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH),
                 null);
-
-        pickerTime.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
+//i will not use this stuff ena seate lay plus one kalareku betoast invalid date yelegnal
+        pickerTime.setCurrentHour(now.get(Calendar.HOUR_OF_DAY) + 1 );
         pickerTime.setCurrentMinute(now.get(Calendar.MINUTE));
 
         buttonSetAlarm = (Button)findViewById(R.id.setalarm);
@@ -150,10 +150,11 @@ private void setalarmfromnotify(){
     // we set the time to midnight (i.e. the first minute of that day)
     Calendar c = Calendar.getInstance();
     c.set(year, month, day);
-    c.set(Calendar.HOUR_OF_DAY, pickerTime.getCurrentHour());
-    c.set(Calendar.MINUTE, pickerTime.getCurrentMinute());
+    c.set(Calendar.HOUR_OF_DAY, 0);
+    c.set(Calendar.MINUTE, 0);
     c.set(Calendar.SECOND, 0);
     // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
+
     scheduleClient.setAlarmForNotification(c);
     // Notify the user what they just did
     Toast.makeText(this, "Notification set for: "+ day +"/"+ (month+1) +"/"+ year, Toast.LENGTH_SHORT).show();

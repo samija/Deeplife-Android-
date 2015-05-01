@@ -3,28 +3,29 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     tools:context=".MainActivity"
-
+android:gravity="center"
     android:background="#0099cc">
 
     <Button
-        android:layout_marginTop="5dp"
+
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/Baddl"
         android:background="@drawable/confirm"
-        android:layout_below="@+id/bimage"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
 
     <Button
-        android:layout_marginTop="5dp"
+        android:visibility="invisible"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/Bshowl"
         android:background="@drawable/homea"
-        android:layout_below="@+id/Baddl"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/bimage"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -74,7 +75,8 @@
         android:layout_below="@+id/etlastnamel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:visibility="invisible" />
 
     <EditText
         android:maxLength="12"
@@ -85,7 +87,8 @@
         android:id="@+id/etphonenumberl"
         android:layout_below="@+id/textView3"
         android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
+        android:layout_toEndOf="@+id/textView2"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -95,7 +98,8 @@
         android:layout_below="@+id/etphonenumberl"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:visibility="invisible" />
 
     <EditText
         android:maxLength="35"
@@ -106,30 +110,28 @@
         android:id="@+id/etemailaddressl"
         android:layout_below="@+id/textView4"
         android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
+        android:layout_toEndOf="@+id/textView2"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewl"
         android:paddingRight="10dp"
-        android:layout_below="@+id/etemailaddressl"
-        android:layout_alignBottom="@+id/Bshowl"
-        android:layout_alignLeft="@+id/etemailaddressl"
-        android:layout_alignStart="@+id/etemailaddressl"
-        android:layout_alignRight="@+id/etfirstnamel"
-        android:layout_alignEnd="@+id/etfirstnamel"
-        android:onClick="onimageclicked"/>
+        android:onClick="onimageclicked"
+        android:layout_below="@+id/textView3"
+        android:layout_toRightOf="@+id/Bshowl"
+        android:layout_toEndOf="@+id/Bshowl" />
 
     <Button
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:id="@+id/bimage"
         android:background="@drawable/upload2"
-android:visibility="invisible"
+        android:visibility="invisible"
         android:layout_below="@+id/etemailaddressl"
-        android:layout_alignRight="@+id/Baddl"
-        android:layout_alignEnd="@+id/Baddl" />
+        android:layout_alignLeft="@+id/Bshowl"
+        android:layout_alignStart="@+id/Bshowl" />
 
     <EditText
         android:maxLength="3"
@@ -140,10 +142,11 @@ android:visibility="invisible"
         android:id="@+id/etcc"
         android:layout_below="@+id/textView3"
         android:layout_toLeftOf="@+id/etfirstnamel"
-        android:layout_toStartOf="@+id/etfirstnamel" />
+        android:layout_toStartOf="@+id/etfirstnamel"
+        android:visibility="invisible" />
 
     <TextView
-android:typeface="monospace"
+        android:typeface="monospace"
         android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,6 +156,7 @@ android:typeface="monospace"
         android:layout_alignBottom="@+id/etcc"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#ff0d0d0d" />
+        android:textColor="#ff0d0d0d"
+        android:visibility="invisible" />
 
 </RelativeLayout>

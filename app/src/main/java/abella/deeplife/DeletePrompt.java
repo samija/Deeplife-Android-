@@ -59,5 +59,11 @@ finish();
 
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }
 

@@ -25,6 +25,16 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
     public static final String COLUMN_IMAGE = "price";
 
 
+    //ma Table login
+    public static final String TABLE_USERLOGIN = "userlogin";
+    public static final String COLUMN_IDL ="useridlogin";
+    public static final String COLUMN_FNAMEL = "fname";
+    public static final String COLUMN_LNAMEL = "lname";
+    public static final String COLUMN_PHONEL = "phone";
+    public static final String COLUMN_EMAILL = "image";
+    public static final String COLUMN_IMAGEL = "price";
+
+
 
     //ma Table two
     public static final String TABLE_USERMEASURMENT = "usermeasurment";
@@ -55,7 +65,14 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
             COLUMN_IMAGE + " TEXT, " +
             COLUMN_PHONE + " INTEGER " +")";
 
-
+    //**** create ma tablelogin
+    public static final String TABLE_CREATEUSERLOGIN = "CREATE TABLE " + TABLE_USERLOGIN + " (" +
+            COLUMN_IDL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COLUMN_FNAMEL + " TEXT, " +
+            COLUMN_LNAMEL + " TEXT, " +
+            COLUMN_EMAILL + " TEXT, " +
+            COLUMN_IMAGEL + " TEXT, " +
+            COLUMN_PHONEL + " INTEGER " +")";
 
     //**** create ma table two
     public static final String TABLE_CREATEUSERMEASURMENT = "CREATE TABLE " + TABLE_USERMEASURMENT + " (" +
@@ -96,7 +113,8 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
         Log.i(LOGTAGA, "TABLE USER Has been created");
         db.execSQL(TABLE_CREATEUSERMEASURMENT);
         Log.i(LOGTAGA, "TABLE MEASURMENT Has been created");
-
+        db.execSQL(TABLE_CREATEUSERLOGIN);
+        Log.i(LOGTAGA, "TABLE login Has been created");
         db.execSQL(TABLE_CREATESCHEDULE);
         Log.i(LOGTAGA, "TABLE SCHEDULE Has been created");
     }
@@ -106,6 +124,7 @@ public class UsersDBOpenHelper extends SQLiteOpenHelper{
        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
       db.execSQL("DROP TABLE IF EXISTS " + TABLE_CREATESCHEDULE);
        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEDULE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERLOGIN);
        onCreate(db);
     }
 
