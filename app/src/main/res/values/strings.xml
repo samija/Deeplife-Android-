@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">DeepLife</string>
-    <string-array name="aboutab">
-        <item>Abella</item>
-        <item>Wesagn</item>
-        <item>Sew</item>
-        <item>Nat</item>
+    <string-array name="Draweritems">
+        <item>Home</item>
+        <item>Create Desiple</item>
+        <item>Contact Us</item>
+        <item>About Deeplife</item>
+        <item>Logout</item>
     </string-array>
 
     <string name="droweropen">Open_Navigation_Drawer></string>

@@ -59,8 +59,9 @@ public class Login extends Activity implements View.OnClickListener{
         prefvalue = settings.getString(Prefss,"Not Found");
 
         if(prefvalue.contentEquals("hacked")){
-            Intent i = new Intent(this,DesipleList.class);
-            startActivity(i);
+             Intent i = new Intent(this,DesipleList.class);
+             startActivity(i);
+             this.finish();
         }
 
     }
@@ -96,7 +97,9 @@ public class Login extends Activity implements View.OnClickListener{
 
                 Toast.makeText(this,"Welcome "+ firsnamel.getText().toString() + " " + lastnamel.getText().toString(),Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this,DesipleList.class);
+Login.this.finish();
                 startActivity(i);
+
                 break;
             case R.id.imageViewl:
                 Intent intent = new Intent();

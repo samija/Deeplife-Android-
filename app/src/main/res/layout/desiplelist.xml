@@ -160,7 +160,7 @@
 </RelativeLayout>
     <ListView
         android:layout_gravity="left"
-        android:entries="@array/aboutab"
+        android:entries="@array/Draweritems"
         android:layout_width="240dp"
         android:divider="@null"
         android:layout_height="match_parent" android:id="@+id/drawerlistl"

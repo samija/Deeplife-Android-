@@ -4,6 +4,7 @@
     android:padding="15dp"
     tools:context=".MainActivity"
 android:gravity="center"
+
     android:background="#0099cc">
 
     <Button
@@ -12,10 +13,11 @@ android:gravity="center"
         android:layout_height="50dp"
         android:id="@+id/Baddl"
         android:background="@drawable/confirm"
-
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_alignBaseline="@+id/Bshowl"
+        android:layout_alignBottom="@+id/Bshowl"
+        android:layout_alignLeft="@+id/Bshowl"
+        android:layout_alignStart="@+id/Bshowl"
+        />
 
     <Button
         android:visibility="invisible"
@@ -129,9 +131,9 @@ android:gravity="center"
         android:id="@+id/bimage"
         android:background="@drawable/upload2"
         android:visibility="invisible"
-        android:layout_below="@+id/etemailaddressl"
-        android:layout_alignLeft="@+id/Bshowl"
-        android:layout_alignStart="@+id/Bshowl" />
+        android:layout_below="@+id/textView4"
+        android:layout_alignRight="@+id/Baddl"
+        android:layout_alignEnd="@+id/Baddl" />
 
     <EditText
         android:maxLength="3"

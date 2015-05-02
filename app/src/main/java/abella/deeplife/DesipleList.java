@@ -21,9 +21,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -62,7 +65,7 @@ TextView tc;
 //for ma drawer
 private DrawerLayout drawerLayout;
     private ListView listView;
-    String[] planets;
+    private DrawerAdapter drawerAdapter;
     private ActionBarDrawerToggle drawerlistner;
     //end ma drawer declaration
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -76,13 +79,13 @@ private DrawerLayout drawerLayout;
 
         setContentView(R.layout.desiplelist);
         //Fo ma drawer
-
+drawerAdapter = new DrawerAdapter(this);
 
         loginimg = (ImageView)findViewById(R.id.loginimage);
         logintxt = (TextView)findViewById(R.id.tvwelcome);
         listView = (ListView)findViewById(R.id.drawerlistl);
-        planets = getResources().getStringArray(R.array.aboutab);
-        listView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,planets));
+        //listview is a listview on ma drawer
+       listView.setAdapter(drawerAdapter);
         drawerLayout =(DrawerLayout)findViewById(R.id.drawerlayout);
         drawerlistner = new ActionBarDrawerToggle(this,drawerLayout,R.drawable.nav2,R.string.droweropen ,R.string.drowerclose);
         drawerLayout.setDrawerListener(drawerlistner);
@@ -331,4 +334,45 @@ pb = (ProgressBar)findViewById(R.id.progressBar);
 
 
 
+}
+
+class DrawerAdapter extends BaseAdapter{
+String[] drawerliststr;
+    private Context context;
+    int[] drawerlistimg = {R.drawable.drawerhome,R.drawable.draweradduser,R.drawable.drawercontactus,R.drawable.draweraboutus,R.drawable.drawerlogout};
+    public DrawerAdapter(Context context){
+        drawerliststr = context.getResources().getStringArray(R.array.Draweritems);
+this.context=context;
+    }
+    @Override
+    public int getCount() {
+        return drawerliststr.length;
+    }
+
+    @Override
+    public Object getItem(int pos) {
+        return drawerliststr[pos];
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int pos, View Convertview, ViewGroup viewGroup) {
+        View row = null;
+        if(Convertview == null){
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+          row =  inflater.inflate(R.layout.drawerrow,viewGroup,false);
+        }else{
+row = Convertview;
+        }
+        TextView itemstr = (TextView)row.findViewById(R.id.tvdrawer);
+        ImageView itemimg = (ImageView)row.findViewById(R.id.imgdrawer);
+
+        itemstr.setText(drawerliststr[pos]);
+        itemimg.setImageResource(drawerlistimg[pos]);
+        return row;
+    }
 }
